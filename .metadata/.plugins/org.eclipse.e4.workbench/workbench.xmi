@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_56_zcH3GEfCb_eNMwX3pfg" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_56_zcX3GEfCb_eNMwX3pfg" bindingContexts="_56_zen3GEfCb_eNMwX3pfg">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Profile.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/Profile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/Profile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Logout.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/Logout.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/Logout.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;LoginServlet_Session.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Session.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Session.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_session.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/Login_with_session.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/Login_with_session.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_cookie.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login_with_cookie.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login_with_cookie.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_session.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login_with_session.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login_with_session.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;LoginServlet_Cookie.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Cookie.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Cookie.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HelloServlet.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/HelloServlet.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/HelloServlet.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.m2e.editor.MavenPomEditor&quot; name=&quot;pom.xml&quot; tooltip=&quot;bai_tap_01/pom.xml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/pom.xml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_session.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/Login_with_session.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/Login_with_session.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_cookie.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/Login_with_cookie.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/Login_with_cookie.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Profile.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/Profile.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/Profile.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Logout.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/Logout.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/Logout.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;LoginServlet_Session.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Session.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Session.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_cookie.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login_with_cookie.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login_with_cookie.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_session.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login_with_session.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login_with_session.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/WEB-INF/Login.html&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/webapp/WEB-INF/Login.html&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;LoginServlet_Cookie.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Cookie.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/LoginServlet_Cookie.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;HelloServlet.java&quot; tooltip=&quot;bai_tap_01/src/main/java/bai_tap_01/controllers/HelloServlet.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/src/main/java/bai_tap_01/controllers/HelloServlet.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.m2e.editor.MavenPomEditor&quot; name=&quot;pom.xml&quot; tooltip=&quot;bai_tap_01/pom.xml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/bai_tap_01/pom.xml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_56_zcX3GEfCb_eNMwX3pfg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_6GhuCn3GEfCb_eNMwX3pfg" label="%trimmedwindow.label.eclipseSDK" x="266" y="266" width="1024" height="768">
     <persistedState key="coolBarVisible" value="true"/>
@@ -57,15 +57,9 @@
           <tags>persp.newWizSC:org.eclipse.ui.editors.wizards.UntitledTextFileWizard</tags>
           <tags>persp.perspSC:org.eclipse.jdt.ui.JavaBrowsingPerspective</tags>
           <tags>persp.perspSC:org.eclipse.debug.ui.DebugPerspective</tags>
-          <tags>persp.editorOnboardingImageUri:platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/onboarding_jperspective.png</tags>
-          <tags>persp.editorOnboardingText:Open a file or drop files here to open them.</tags>
           <tags>persp.showIn:org.eclipse.jdt.ui.PackageExplorer</tags>
           <tags>persp.showIn:org.eclipse.team.ui.GenericHistoryView</tags>
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
-          <tags>persp.editorOnboardingCommand:Find Actions$$$Ctrl+3</tags>
-          <tags>persp.editorOnboardingCommand:Show Key Assist$$$Ctrl+Shift+L</tags>
-          <tags>persp.editorOnboardingCommand:New$$$Ctrl+N</tags>
-          <tags>persp.editorOnboardingCommand:Open Type$$$Ctrl+Shift+T</tags>
           <tags>persp.actionSet:org.eclipse.debug.ui.breakpointActionSet</tags>
           <tags>persp.actionSet:org.eclipse.jdt.debug.ui.JDTDebugActionSet</tags>
           <tags>persp.newWizSC:org.eclipse.jdt.junit.wizards.NewTestCaseCreationWizard</tags>
@@ -78,6 +72,12 @@
           <tags>persp.viewSC:org.eclipse.tm.terminal.view.ui.TerminalsView</tags>
           <tags>persp.showIn:org.eclipse.tm.terminal.view.ui.TerminalsView</tags>
           <tags>persp.viewSC:org.eclipse.ant.ui.views.AntView</tags>
+          <tags>persp.editorOnboardingImageUri:platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/onboarding_jperspective.png</tags>
+          <tags>persp.editorOnboardingText:Open a file or drop files here to open them.</tags>
+          <tags>persp.editorOnboardingCommand:Find Actions$$$Ctrl+3</tags>
+          <tags>persp.editorOnboardingCommand:Show Key Assist$$$Ctrl+Shift+L</tags>
+          <tags>persp.editorOnboardingCommand:New$$$Ctrl+N</tags>
+          <tags>persp.editorOnboardingCommand:Open Type$$$Ctrl+Shift+T</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_6NVgqH3GEfCb_eNMwX3pfg" selectedElement="_6NVgtH3GEfCb_eNMwX3pfg" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_6NVgqX3GEfCb_eNMwX3pfg" containerData="2500" selectedElement="_6NVgqn3GEfCb_eNMwX3pfg">
               <children xsi:type="basic:PartSashContainer" xmi:id="_6NVgqn3GEfCb_eNMwX3pfg" containerData="6000" selectedElement="_6NVgq33GEfCb_eNMwX3pfg">
@@ -219,7 +219,7 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_6NJ6cH3GEfCb_eNMwX3pfg" elementId="org.eclipse.ui.editorss" selectedElement="_6NJ6cX3GEfCb_eNMwX3pfg">
-      <children xsi:type="basic:PartStack" xmi:id="_6NJ6cX3GEfCb_eNMwX3pfg" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_J4GXEH3MEfCb_eNMwX3pfg">
+      <children xsi:type="basic:PartStack" xmi:id="_6NJ6cX3GEfCb_eNMwX3pfg" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_DKc6sH3JEfCb_eNMwX3pfg">
         <tags>EditorStack</tags>
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>active</tags>
@@ -240,6 +240,8 @@
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.wst.html.core.htmlsource.source</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_gSq8IH3LEfCb_eNMwX3pfg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Login_with_cookie.html" iconURI="platform:/plugin/org.eclipse.wst.html.ui/icons/full/obj16/sourceEditor.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.wst.html.core.htmlsource.source&quot; name=&quot;Login_with_cookie.html&quot; partName=&quot;Login_with_cookie.html&quot; title=&quot;Login_with_cookie.html&quot; tooltip=&quot;bai_tap_01/src/main/webapp/Login_with_cookie.html&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/bai_tap_01/src/main/webapp/Login_with_cookie.html&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;354&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
@@ -252,8 +254,6 @@
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
         </children>
       </children>
     </sharedElements>
@@ -407,7 +407,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot;>&#xD;&#xA;&lt;lastRecentlyUsedFilters/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:Server</tags>
-      <tags>highlighted</tags>
       <menus xmi:id="_FdC6UH3HEfCb_eNMwX3pfg" elementId="org.eclipse.wst.server.ui.ServersView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -421,7 +420,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKEn3GEfCb_eNMwX3pfg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_6HWNYH3GEfCb_eNMwX3pfg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_571j9H3GEfCb_eNMwX3pfg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HDQCIH3SEfCZjvfxLBG-8A" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_571j9H3GEfCb_eNMwX3pfg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKE33GEfCb_eNMwX3pfg" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -429,8 +428,8 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKFX3GEfCb_eNMwX3pfg" elementId="org.eclipse.ui.workbench.edit">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_6HWNZn3GEfCb_eNMwX3pfg" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_571iEH3GEfCb_eNMwX3pfg"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_6HWNZ33GEfCb_eNMwX3pfg" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_571imn3GEfCb_eNMwX3pfg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HDQpMH3SEfCZjvfxLBG-8A" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_571iEH3GEfCb_eNMwX3pfg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HDQpMX3SEfCZjvfxLBG-8A" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_571imn3GEfCb_eNMwX3pfg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKFn3GEfCb_eNMwX3pfg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -445,7 +444,7 @@
       <children xsi:type="menu:ToolBar" xmi:id="_6OTJ8H3GEfCb_eNMwX3pfg" elementId="org.eclipse.search.searchActionSet">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_l7uzMH3HEfCb_eNMwX3pfg" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
+      <children xsi:type="menu:ToolBar" xmi:id="_l7uzMH3HEfCb_eNMwX3pfg" elementId="org.eclipse.ui.edit.text.actionSet.presentation" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKGH3GEfCb_eNMwX3pfg" elementId="group.nav" toBeRendered="false">
@@ -454,7 +453,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKGn3GEfCb_eNMwX3pfg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_6HWNbX3GEfCb_eNMwX3pfg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_571jpH3GEfCb_eNMwX3pfg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HDR3UH3SEfCZjvfxLBG-8A" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_571jpH3GEfCb_eNMwX3pfg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_6HTKG33GEfCb_eNMwX3pfg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
