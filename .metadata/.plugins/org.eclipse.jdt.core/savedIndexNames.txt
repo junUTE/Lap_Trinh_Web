@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+E:\HK1_2025-2026\Lap_Trinh_Web\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3803894794.index
+733377433.index

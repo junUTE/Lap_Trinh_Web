@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+E:\HK1_2025-2026\Lap_Trinh_Web\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+121239662.index
+733377433.index
+410210139.index
+2707419694.index
+2940737437.index
+1812789285.index
+821053285.index
