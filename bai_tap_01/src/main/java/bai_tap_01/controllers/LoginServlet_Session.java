@@ -5,9 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 
-
+@WebServlet(urlPatterns = { "/loginsession" })
 public class LoginServlet_Session extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,8 +34,17 @@ public class LoginServlet_Session extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		PrintWriter out = response.getWriter();
+		String username1 = request.getParameter("username");
+		String password1 = request.getParameter("password");
+		if (username1.equals("trungnh") && password1.equals("123")) {
+			out.print("Chao mung ban, " + username1);
+			HttpSession session = request.getSession();
+			session.setAttribute("name", username1);
+		} else {
+			out.print("Tai khoan khong chinh xac");
+			request.getRequestDispatcher("login.html").include(request, response);
+		}
 	}
 
 }
