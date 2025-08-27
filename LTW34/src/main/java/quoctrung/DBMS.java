@@ -40,7 +40,7 @@ public class DBMS {
                 // create statement to insert
                 PreparedStatement stmt = conn.prepareStatement(sqlInsert);
                 stmt.setInt(1, 1);
-                stmt.setString(2, "Trung");
+                stmt.setString(2, "Trungh");
                 stmt.setString(3, "HCM");
                 stmt.execute();
 
