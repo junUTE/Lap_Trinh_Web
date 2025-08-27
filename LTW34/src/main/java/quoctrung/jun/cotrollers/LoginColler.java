@@ -2,6 +2,7 @@ package quoctrung.jun.cotrollers;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +21,8 @@ public class LoginColler extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
+		rd.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +42,7 @@ public class LoginColler extends HttpServlet {
 		if (user != null) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
-			resp.sendRedirect(req.getContextPath() + "/waiting");
+			resp.sendRedirect(req.getContextPath() + "/home");
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			req.setAttribute("alert", alertMsg);
