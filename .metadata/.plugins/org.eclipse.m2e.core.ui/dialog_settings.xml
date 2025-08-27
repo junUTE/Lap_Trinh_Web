@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="E:\HK1_2025-2026\Lap_Trinh_Web\Week2_BaiTapVeNha_VD2\src\main\java"/>
+			<item value="E:\HK1_2025-2026\Lap_Trinh_Web\LTW34"/>
+			<item value="E:\HK1_2025-2026\Lap_Trinh_Web\LTW34\src\main\java\quoctrung\jun\cotrollers\LoginColler.java"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -43,13 +46,10 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="quoctrung.jun"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="LTW34"/>
-			<item value="bai_tap_01"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -60,7 +60,7 @@
 			<item value="[name]"/>
 		</list>
 		<list key="version">
-			<item value="1.1.0"/>
+			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
 	<section name="org.eclipse.m2e.core.pom.overview">

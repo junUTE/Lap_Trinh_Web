@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="quoctrung.jun.services.UserService"/>
-    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="quoctrung.jun.dao.impl.UserDaoImpl"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.annotation.WebServlet"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="jun.dao.UserDao"/>
+    <fullyQualifiedTypeName name="jun.dao.impl.UserDaoImpl"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="jun.constants.constant"/>
+    <fullyQualifiedTypeName name="jun.services.UserService"/>
+    <fullyQualifiedTypeName name="jun.services.impl.UserServiceImpl"/>
 </qualifiedTypeNameHistroy>
