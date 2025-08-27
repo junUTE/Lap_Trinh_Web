@@ -30,37 +30,4 @@ public class CSDL {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         return DriverManager.getConnection(url, userID, password);
     }
-
-    public static void main(String[] args) {
-            String sqlInsert = "INSERT INTO Users VALUES(?, ?, ?)";
-            String selectAll = "SELECT * FROM Users";
-
-            try {
-                // connect to database
-                Connection conn = new DBMS().getConnection();
-
-                // create statement to insert
-                PreparedStatement stmt = conn.prepareStatement(sqlInsert);
-                stmt.setInt(1, 1);
-                stmt.setString(2, "Trungh");
-                stmt.setString(3, "HCM");
-                stmt.execute();
-
-                // select all
-                stmt = conn.prepareStatement(selectAll);
-
-                // get data from table
-                ResultSet rs = stmt.executeQuery();
-
-                // show data
-                while (rs.next()) {
-                    System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
-                }
-
-                stmt.close();
-                conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
 }
