@@ -1,1 +1,32 @@
-/.metadata/
+# Maven
+/target/
+
+# Gradle
+/build/
+
+# Logs
+*.log
+*.bak*
+
+# IDEs
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+
+# STS metadata
+.metadata/
+
+# Environment variables
+.env
+
+# Lombok config
+lombok.config
