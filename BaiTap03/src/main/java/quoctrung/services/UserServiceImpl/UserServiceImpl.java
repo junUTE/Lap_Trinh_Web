@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
 	    // gọi DAO để xác thực
 	    return userDao.login(username, password);
 	}
+
+	@Override
+	public boolean updatePasswordByEmail(String email, String newPassword) {
+		return userDao.updatePasswordByEmail(email, newPassword);
+	}
 }

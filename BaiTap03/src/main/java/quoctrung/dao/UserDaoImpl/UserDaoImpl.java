@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public void insert(UserModel user) {
-		String sql = "INSERT INTO users(username, fullname, email, phone, password) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO users(userName, hoTen, email, SDT, passWord) VALUES (?,?,?,?,?)";
 		try {
 			conn = new DataBaseConnection().getConnection();
 			ps = conn.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkExistEmail(String email) {
 		boolean duplicate = false;
-		String query = "select * from Users where email = ?";
+		String query = "select * from users where email = ?";
 		try {
 			conn = new DataBaseConnection().getConnection();
 			ps = conn.prepareStatement(query);
@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkExistUsername(String username) {
 		boolean duplicate = false;
-		String query = "select * from Users where username = ?";
+		String query = "select * from users where userName = ?";
 		try {
 			conn = new DataBaseConnection().getConnection();
 			ps = conn.prepareStatement(query);
@@ -73,7 +73,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean checkExistPhone(String phone) {
 		boolean duplicate = false;
-		String query = "select * from Users where phone = ?";
+		String query = "select * from users where SDT = ?";
 		try {
 			conn = new DataBaseConnection().getConnection();
 			ps = conn.prepareStatement(query);
@@ -100,11 +100,11 @@ public class UserDaoImpl implements UserDao {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				user = new UserModel(
-					rs.getInt("id"),
+					rs.getInt("ID"),
 					rs.getString("userName"),
-					rs.getString("fullname"),
+					rs.getString("hoTen"),
 					rs.getString("email"),
-					rs.getString("phone"),
+					rs.getString("SDT"),
 					rs.getString("passWord")
 				);
 			}
@@ -120,5 +120,19 @@ public class UserDaoImpl implements UserDao {
 		try { if (rs != null) rs.close(); } catch (Exception e) {}
 		try { if (ps != null) ps.close(); } catch (Exception e) {}
 		try { if (conn != null) conn.close(); } catch (Exception e) {}
+	}
+
+	@Override
+	public boolean updatePasswordByEmail(String email, String newPassword) {
+		String sql = "UPDATE users SET passWord = ? WHERE email = ?";
+	    try (Connection conn = new DataBaseConnection().getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, newPassword);
+	        ps.setString(2, email);
+	        return ps.executeUpdate() > 0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
 }

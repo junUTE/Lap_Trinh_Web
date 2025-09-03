@@ -32,10 +32,10 @@ public class RegisterController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String userName = req.getParameter("userName");
-		String passWord = req.getParameter("passWord");
+		String hoTen = req.getParameter("hoTen");
 		String email = req.getParameter("email");
-		String fullname = req.getParameter("fullname");
-		String phone = req.getParameter("phone");
+		String SDT = req.getParameter("SDT");
+		String passWord = req.getParameter("passWord");
 
 		UserService service = new UserServiceImpl();
 		String alertMsg = "";
@@ -54,7 +54,7 @@ public class RegisterController extends HttpServlet {
 			return;
 		}
 
-		boolean isSuccess = service.register(userName, passWord, email, fullname, phone);
+		boolean isSuccess = service.register(userName, hoTen, email, SDT, passWord);
 		if (isSuccess) {
 			req.setAttribute("alert", alertMsg);
 			resp.sendRedirect(req.getContextPath() + "/login");

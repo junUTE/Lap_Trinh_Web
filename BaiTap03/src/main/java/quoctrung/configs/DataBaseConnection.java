@@ -8,7 +8,7 @@ public class DataBaseConnection {
 	private final String dbName = "LapTrinhWebBaiTap03";
 	private final String portNumber = "1433";
 	private final String instance = "";
-	private final String userID = "as";
+	private final String userID = "sa";
 	private final String passWord = "1";
 	
 	public Connection getConnection() throws Exception{

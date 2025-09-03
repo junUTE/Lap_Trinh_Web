@@ -12,4 +12,6 @@ public interface UserDao {
 	boolean checkExistPhone(String phone);
 
 	UserModel login(String username, String password);
+	
+	boolean updatePasswordByEmail(String email, String newPassword);
 }
