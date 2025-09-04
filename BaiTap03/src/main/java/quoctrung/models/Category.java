@@ -1,4 +1,4 @@
-package jun.models;
+package quoctrung.models;
 
 public class Category {
 	

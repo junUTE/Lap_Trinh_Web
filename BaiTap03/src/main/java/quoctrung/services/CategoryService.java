@@ -1,7 +1,8 @@
-package jun.services;
+package quoctrung.services;
 
 import java.util.List;
-import jun.models.Category;
+
+import quoctrung.models.Category;
 
 public interface CategoryService {
 	void insert(Category category);

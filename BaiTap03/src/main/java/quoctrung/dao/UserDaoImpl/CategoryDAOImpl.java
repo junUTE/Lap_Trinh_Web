@@ -1,16 +1,19 @@
-package jun.dao.impl;
+package quoctrung.dao.UserDaoImpl;
 
 import java.sql.Connection;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import jun.configs.DBConnection;
-import jun.dao.CategoryDAO;
-import jun.models.Category;
+import quoctrung.configs.DataBaseConnection;
+import quoctrung.dao.CategoryDAO;
+import quoctrung.models.Category;
 
-public class CategoryDAOImpl extends DBConnection implements CategoryDAO{
+
+public class CategoryDAOImpl extends DataBaseConnection implements CategoryDAO{
 
 	@Override
 	public void insert(Category category) {
@@ -105,13 +108,4 @@ public class CategoryDAOImpl extends DBConnection implements CategoryDAO{
 		}
 		return categories;
 	}
-
-	@Override
-	public List<Category> search(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
 }

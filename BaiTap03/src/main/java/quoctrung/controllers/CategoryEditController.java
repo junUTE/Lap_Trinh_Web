@@ -1,4 +1,4 @@
-package jun.controllers;
+package quoctrung.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,17 +12,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import jun.models.Category;
-import jun.services.CategoryService;
-import jun.services.impl.CategoryServiceImpl;
-import jun.constants.constant;
+import quoctrung.constants.constantCategory;
+import quoctrung.models.Category;
+import quoctrung.services.CategoryService;
+import quoctrung.services.UserServiceImpl.CategoryServiceImpl;
+
 
 @WebServlet(urlPatterns = "/admin/category/edit")
 @MultipartConfig
 public class CategoryEditController extends HttpServlet  {
 
 	private static final long serialVersionUID = 1L;
-	private CategoryService cateService = new CategoryServiceImpl();
+	private CategoryService cateService = (CategoryService) new CategoryServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +56,7 @@ public class CategoryEditController extends HttpServlet  {
 	        String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 	        String newFileName = System.currentTimeMillis() + "." + ext;
 
-	        File uploadFile = new File(constant.DIR + "/category/" + newFileName);
+	        File uploadFile = new File(constantCategory.DIR + "/category/" + newFileName);
 	        uploadFile.getParentFile().mkdirs();
 	        filePart.write(uploadFile.getAbsolutePath());
 

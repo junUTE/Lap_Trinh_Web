@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="jun.models.Category" %>
+<%@ page import="quoctrung.models.Category" %>
 <%
     Category category = (Category) request.getAttribute("category");
 %>

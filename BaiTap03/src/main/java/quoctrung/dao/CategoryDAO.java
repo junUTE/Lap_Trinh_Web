@@ -1,10 +1,11 @@
-package jun.dao;
+package quoctrung.dao;
 
 import java.util.List;
-import jun.models.Category;
+
+import quoctrung.models.Category;
 
 public interface CategoryDAO {
-	void insert(jun.models.Category category);
+	void insert(quoctrung.models.Category category);
 
 	void edit(Category category);
 

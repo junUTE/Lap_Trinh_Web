@@ -1,6 +1,8 @@
-package jun.services.impl;
+package quoctrung.services.UserServiceImpl;
 
 import java.io.File;
+
+
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -8,10 +10,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import jun.dao.CategoryDAO;
-import jun.dao.impl.CategoryDAOImpl;
-import jun.services.CategoryService;
-import jun.models.Category;
+import quoctrung.dao.CategoryDAO;
+import quoctrung.dao.UserDaoImpl.CategoryDAOImpl;
+import quoctrung.models.Category;
+import quoctrung.services.CategoryService;
+
 
 public class CategoryServiceImpl implements CategoryService {
 	
@@ -76,7 +79,4 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> search(String keyword) {
 		return categoryDao.search(keyword);
 	}
-	
-	
-
 }
