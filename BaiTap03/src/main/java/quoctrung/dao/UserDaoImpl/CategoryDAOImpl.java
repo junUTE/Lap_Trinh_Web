@@ -108,4 +108,10 @@ public class CategoryDAOImpl extends DataBaseConnection implements CategoryDAO{
 		}
 		return categories;
 	}
+
+	@Override
+	public List<Category> search(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
