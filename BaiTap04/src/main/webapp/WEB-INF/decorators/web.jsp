@@ -10,7 +10,7 @@
 <!-- Head BEGIN -->
 <head>
 <meta charset="utf-8">
-<title>Metronic Shop UI</title>
+<title>WEB của Jun</title>
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -41,15 +41,16 @@
 
 <!-- Global styles START -->
 <link
-	href="${URL}assets/global/plugins/font-awesome/css/font-awesome.min.css"
+	href="${URL}/assets/global/plugins/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
-<link href="${URL}assets/global/plugins/bootstrap/css/bootstrap.min.css"
+<link
+	href="${URL}/assets/global/plugins/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Global styles END -->
 
 <!-- Page level plugin styles START -->
 <link
-	href="${URL}assets/global/plugins/fancybox/source/jquery.fancybox.css"
+	href="${URL}/assets/global/plugins/fancybox/source/jquery.fancybox.css"
 	rel="stylesheet">
 <link
 	href="${URL}assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css"

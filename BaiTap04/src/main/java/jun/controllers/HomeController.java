@@ -8,15 +8,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jun.entities.User;
 
-@WebServlet(urlPatterns = {"/home", "/", "/admin"})
+@WebServlet(urlPatterns = { "/home" })
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher rd = req.getRequestDispatcher("/web.jsp");
+		rd.forward(req, resp);
+	}
 
-		req.getRequestDispatcher("/views/home.jsp").forward(req, resp);
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 }

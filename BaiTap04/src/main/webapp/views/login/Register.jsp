@@ -25,7 +25,7 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="fa fa-user"></i></span>
-        <input type="text" class="form-control" placeholder="Họ tên" name="hoTen" required>
+        <input type="text" class="form-control" placeholder="Họ tên" name="fullName" required>
     </div>
 
     <div class="input-group mb-3">
@@ -35,12 +35,12 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="fa fa-phone"></i></span>
-        <input type="text" class="form-control" placeholder="Số điện thoại" name="SDT" required>
+        <input type="text" class="form-control" placeholder="Số điện thoại" name="phone" required>
     </div>
 
     <div class="input-group mb-3">
         <span class="input-group-text"><i class="fa fa-lock"></i></span>
-        <input type="password" class="form-control" placeholder="Mật khẩu" name="passWord" required>
+        <input type="password" class="form-control" placeholder="Mật khẩu" name="password" required>
     </div>
 
     <div class="input-group mb-3">

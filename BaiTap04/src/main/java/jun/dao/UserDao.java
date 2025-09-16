@@ -17,4 +17,8 @@ public interface UserDao {
 	boolean update(User user);
 
 	void insert(User user);
+
+	User findByEmail(String email);
+
+	User findById(int id);
 }

@@ -1,10 +1,10 @@
 package jun.services.UserServiceImpl;
 
 import jun.entities.User;
-import jun.models.UserModel;
+
 import jun.services.UserService;
 import jun.dao.UserDao;
-import jun.dao.UserDaoImpl.UserDaoImpl;
+import jun.dao.impl.UserDaoImpl;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao = new UserDaoImpl();
@@ -59,5 +59,20 @@ public class UserServiceImpl implements UserService {
     public boolean updatePasswordByEmail(String email, String newPassword) {
         return userDao.updatePasswordByEmail(email, newPassword);
     }
+
+	@Override
+	public User findByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
+
+	@Override
+	public void edit(User user) {
+		userDao.update(user);
+	}
+
+	@Override
+	public User getIdUser(int id) {
+		return userDao.findById(id);
+	}
 
 }

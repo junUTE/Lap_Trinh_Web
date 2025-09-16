@@ -32,10 +32,8 @@
 				<!-- BEGIN TOP BAR MENU -->
 				<div class="col-md-6 col-sm-6 additional-nav">
 					<ul class="list-unstyled list-inline pull-right">
-						<li><a href="shop-account.html">My Account</a></li>
-						<li><a href="shop-wishlist.html">My Wishlist</a></li>
-						<li><a href="shop-checkout.html">Checkout</a></li>
-						<li><a href="page-login.html">Log In</a></li>
+						<li><a href="register">Register</a></li>
+						<li><a href="login">Log In</a></li>
 					</ul>
 				</div>
 				<!-- END TOP BAR MENU -->
@@ -47,65 +45,23 @@
 	<!-- BEGIN HEADER -->
 	<div class="header">
 		<div class="container">
-			<a class="site-logo" href="shop-index.html"><img
+			<a class="site-logo" href="#"><img
 				src="${URL}assets/frontend/layout/img/logos/logo-shop-red.png"
-				alt="Metronic Shop UI"></a> <a href="javascript:void(0);"
+				alt="Web của Jun"></a> <a href="javascript:void(0);"
 				class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
 			<!-- BEGIN CART -->
 			<div class="top-cart-block">
 				<div class="top-cart-info">
-					<a href="javascript:void(0);" class="top-cart-info-count">3
-						items</a> <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
+					<a href="javascript:void(0);" class="top-cart-info-count">0
+						items</a> <a href="javascript:void(0);" class="top-cart-info-value">$0</a>
 				</div>
 				<i class="fa fa-shopping-cart"></i>
 
 				<div class="top-cart-content-wrapper">
 					<div class="top-cart-content">
 						<ul class="scroller" style="height: 250px;">
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
-									src="${URL}assets/frontend/pages/img/cart-img.jpg"
-									alt="Rolex Classic Watch" width="37" height="34"></a> <span
-								class="cart-content-count">x 1</span> <strong><a
-									href="shop-item.html">Rolex Classic Watch</a></strong> <em>$1230</em> <a
-								href="javascript:void(0);" class="del-goods">&nbsp;</a></li>
-							<li><a href="shop-item.html"><img
+							<li><a href="#"><img
 									src="${URL}assets/frontend/pages/img/cart-img.jpg"
 									alt="Rolex Classic Watch" width="37" height="34"></a> <span
 								class="cart-content-count">x 1</span> <strong><a
@@ -128,26 +84,26 @@
 						data-toggle="dropdown" data-target="#" href="#"> Woman </a> <!-- BEGIN DROPDOWN MENU -->
 						<ul class="dropdown-menu">
 							<li class="dropdown-submenu"><a
-								href="shop-product-list.html">Hi Tops <i
+								href="#">Hi Tops <i
 									class="fa fa-angle-right"></i></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="shop-product-list.html">Second Level Link</a></li>
-									<li><a href="shop-product-list.html">Second Level Link</a></li>
+									<li><a href="#">Second Level Link</a></li>
+									<li><a href="#">Second Level Link</a></li>
 									<li class="dropdown-submenu"><a class="dropdown-toggle"
 										data-toggle="dropdown" data-target="#" href="#"> Second
 											Level Link <i class="fa fa-angle-right"></i>
 									</a>
 										<ul class="dropdown-menu">
-											<li><a href="shop-product-list.html">Third Level
+											<li><a href="#">Third Level
 													Link</a></li>
-											<li><a href="shop-product-list.html">Third Level
+											<li><a href="#">Third Level
 													Link</a></li>
-											<li><a href="shop-product-list.html">Third Level
+											<li><a href="#">Third Level
 													Link</a></li>
 										</ul></li>
 								</ul></li>
-							<li><a href="shop-product-list.html">Running Shoes</a></li>
-							<li><a href="shop-product-list.html">Jackets and Coats</a></li>
+							<li><a href="#">Running Shoes</a></li>
+							<li><a href="#">Jackets and Coats</a></li>
 						</ul> <!-- END DROPDOWN MENU --></li>
 					<li class="dropdown dropdown-megamenu"><a
 						class="dropdown-toggle" data-toggle="dropdown" data-target="#"
@@ -159,62 +115,62 @@
 										<div class="col-md-4 header-navigation-col">
 											<h4>Footwear</h4>
 											<ul>
-												<li><a href="shop-product-list.html">Astro Trainers</a></li>
-												<li><a href="shop-product-list.html">Basketball
+												<li><a href="#">Astro Trainers</a></li>
+												<li><a href="#">Basketball
 														Shoes</a></li>
-												<li><a href="shop-product-list.html">Boots</a></li>
-												<li><a href="shop-product-list.html">Canvas Shoes</a></li>
-												<li><a href="shop-product-list.html">Football Boots</a></li>
-												<li><a href="shop-product-list.html">Golf Shoes</a></li>
-												<li><a href="shop-product-list.html">Hi Tops</a></li>
-												<li><a href="shop-product-list.html">Indoor and
+												<li><a href="#">Boots</a></li>
+												<li><a href="#">Canvas Shoes</a></li>
+												<li><a href="#">Football Boots</a></li>
+												<li><a href="#">Golf Shoes</a></li>
+												<li><a href="#">Hi Tops</a></li>
+												<li><a href="#">Indoor and
 														Court Trainers</a></li>
 											</ul>
 										</div>
 										<div class="col-md-4 header-navigation-col">
 											<h4>Clothing</h4>
 											<ul>
-												<li><a href="shop-product-list.html">Base Layer</a></li>
-												<li><a href="shop-product-list.html">Character</a></li>
-												<li><a href="shop-product-list.html">Chinos</a></li>
-												<li><a href="shop-product-list.html">Combats</a></li>
-												<li><a href="shop-product-list.html">Cricket
+												<li><a href="#">Base Layer</a></li>
+												<li><a href="#">Character</a></li>
+												<li><a href="#">Chinos</a></li>
+												<li><a href="#">Combats</a></li>
+												<li><a href="#">Cricket
 														Clothing</a></li>
-												<li><a href="shop-product-list.html">Fleeces</a></li>
-												<li><a href="shop-product-list.html">Gilets</a></li>
-												<li><a href="shop-product-list.html">Golf Tops</a></li>
+												<li><a href="#">Fleeces</a></li>
+												<li><a href="#">Gilets</a></li>
+												<li><a href="#">Golf Tops</a></li>
 											</ul>
 										</div>
 										<div class="col-md-4 header-navigation-col">
 											<h4>Accessories</h4>
 											<ul>
-												<li><a href="shop-product-list.html">Belts</a></li>
-												<li><a href="shop-product-list.html">Caps</a></li>
-												<li><a href="shop-product-list.html">Gloves, Hats
+												<li><a href="#">Belts</a></li>
+												<li><a href="#">Caps</a></li>
+												<li><a href="#">Gloves, Hats
 														and Scarves</a></li>
 											</ul>
 
 											<h4>Clearance</h4>
 											<ul>
-												<li><a href="shop-product-list.html">Jackets</a></li>
-												<li><a href="shop-product-list.html">Bottoms</a></li>
+												<li><a href="#">Jackets</a></li>
+												<li><a href="#">Bottoms</a></li>
 											</ul>
 										</div>
 										<div class="col-md-12 nav-brands">
 											<ul>
-												<li><a href="shop-product-list.html"><img
+												<li><a href="#"><img
 														title="esprit" alt="esprit"
 														src="${URL}assets/frontend/pages/img/brands/esprit.jpg"></a></li>
-												<li><a href="shop-product-list.html"><img
+												<li><a href="#"><img
 														title="gap" alt="gap"
 														src="${URL}assets/frontend/pages/img/brands/gap.jpg"></a></li>
-												<li><a href="shop-product-list.html"><img
+												<li><a href="#"><img
 														title="next" alt="next"
 														src="${URL}assets/frontend/pages/img/brands/next.jpg"></a></li>
-												<li><a href="shop-product-list.html"><img
+												<li><a href="#"><img
 														title="puma" alt="puma"
 														src="${URL}assets/frontend/pages/img/brands/puma.jpg"></a></li>
-												<li><a href="shop-product-list.html"><img
+												<li><a href="#"><img
 														title="zara" alt="zara"
 														src="${URL}assets/frontend/pages/img/brands/zara.jpg"></a></li>
 											</ul>
@@ -300,28 +256,28 @@
 									Header Fixed</a></li>
 							<li><a href="shop-index-light-footer.html">Home Light
 									Footer</a></li>
-							<li><a href="shop-product-list.html">Product List</a></li>
-							<li><a href="shop-search-result.html">Search Result</a></li>
-							<li><a href="shop-item.html">Product Page</a></li>
-							<li><a href="shop-shopping-cart-null.html">Shopping Cart
+							<li><a href="#">Product List</a></li>
+							<li><a href="#">Search Result</a></li>
+							<li><a href="#">Product Page</a></li>
+							<li><a href="#">Shopping Cart
 									(Null Cart)</a></li>
-							<li><a href="shop-shopping-cart.html">Shopping Cart</a></li>
-							<li><a href="shop-checkout.html">Checkout</a></li>
-							<li><a href="shop-about.html">About</a></li>
-							<li><a href="shop-contacts.html">Contacts</a></li>
-							<li><a href="shop-account.html">My account</a></li>
-							<li><a href="shop-wishlist.html">My Wish List</a></li>
-							<li><a href="shop-goods-compare.html">Product Comparison</a></li>
-							<li><a href="shop-standart-forms.html">Standart Forms</a></li>
-							<li><a href="shop-faq.html">FAQ</a></li>
-							<li><a href="shop-privacy-policy.html">Privacy Policy</a></li>
-							<li><a href="shop-terms-conditions-page.html">Terms
+							<li><a href="#">Shopping Cart</a></li>
+							<li><a href="#">Checkout</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Contacts</a></li>
+							<li><a href="#">My account</a></li>
+							<li><a href="#">My Wish List</a></li>
+							<li><a href="#">Product Comparison</a></li>
+							<li><a href="#">Standart Forms</a></li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="#">Terms
 									&amp; Conditions</a></li>
 						</ul></li>
-					<li><a href="index.html" target="_blank">Corporate</a></li>
-					<li><a href="onepage-index.html" target="_blank">One Page</a></li>
+					<li><a href="#" target="_blank">Corporate</a></li>
+					<li><a href="#" target="_blank">One Page</a></li>
 					<li><a
-						href="http://keenthemes.com/preview/metronic/theme/templates/admin&amp;page=ecommerce_index.html"
+						href="admin/home"
 						target="_blank">Admin theme</a></li>
 
 					<!-- BEGIN TOP SEARCH -->

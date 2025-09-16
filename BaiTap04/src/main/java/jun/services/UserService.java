@@ -18,4 +18,10 @@ public interface UserService {
 
 	boolean updatePasswordByEmail(String email, String newPassword);
 
+	User findByEmail(String email);
+
+	void edit(User user);
+
+	User getIdUser(int id);
+
 }

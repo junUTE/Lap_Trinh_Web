@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 
+
+<%@ include file="/common/admin/header.jsp"%>
+
 <!-- Begin slider -->
 <%@ include file="/common/web/slider.jsp"%>
 <!-- End slider -->
@@ -45,7 +48,7 @@
 						</div>
 					</div>
 					<h3>
-						<a href="shop-item.html">Berry Lace Dress2</a>
+						<a href="#">Berry Lace Dress2</a>
 					</h3>
 					<div class="pi-price">$29.00</div>
 					<a href="#" class="btn btn-default add2cart">Add to cart</a>
@@ -64,7 +67,7 @@
 						</div>
 					</div>
 					<h3>
-						<a href="shop-item.html">Berry Lace Dress2</a>
+						<a href="#">Berry Lace Dress2</a>
 					</h3>
 					<div class="pi-price">$29.00</div>
 					<a href="#" class="btn btn-default add2cart">Add to cart</a>
@@ -505,14 +508,6 @@
 	<!-- END PROMO -->
 </div>
 <!-- END TWO PRODUCTS & PROMO -->
-
-<!-- BEGIN BRANDS -->
-<%@ include file="/common/web/brands.jsp"%>
-<!-- END BRANDS -->
-
-<!-- BEGIN STEPS -->
-<%@ include file="/common/web/steps.jsp"%>
-<!-- END STEPS -->
 
 <!-- Begin PopUp View Product -->
 <!-- BEGIN fast view of a product -->

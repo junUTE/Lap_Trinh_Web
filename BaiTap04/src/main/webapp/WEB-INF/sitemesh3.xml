@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
-	<mapping path="/*" name="web" decorator="web.jsp" />
-	<mapping path="/admin/*" name="admin" decorator="admin.jsp" />
-	<mapping path="/user/*" name="user" decorator="user.jsp" />
-	<mapping path="/manager/*" name="manager" decorator="manager.jsp" />
-	<!-- Exclude path from decoration. -->
-	<mapping path="/api/*" name="api" exclude="true" />
-	<mapping path="*.css" exclude="true"/>
+    <!-- layout mặc định -->
+    <mapping path="/*" name="web" decorator="web.jsp" />
+
+    <!-- layout riêng cho admin -->
+    <mapping path="/admin/*" name="admin" decorator="admin.jsp" />
+
+    <!-- layout riêng cho user -->
+    <mapping path="/user/*" name="user" decorator="user.jsp" />
+
+    <!-- layout riêng cho manager -->
+    <mapping path="/manager/*" name="manager" decorator="manager.jsp" />
+
+    <!-- exclude API và static resources -->
+    <mapping path="/api/*" name="api" exclude="true" />
+    <mapping path="*.css" exclude="true"/>
     <mapping path="*.js" exclude="true"/>
     <mapping path="*.png" exclude="true"/>
     <mapping path="*.jpg" exclude="true"/>
     <mapping path="*.gif" exclude="true"/>
+
+    <!-- exclude login/register/forgot-password -->
+    <mapping path="/login" exclude="true"/>
+    <mapping path="/register" exclude="true"/>
+    <mapping path="/forgot-password" exclude="true"/>
 </sitemesh>
