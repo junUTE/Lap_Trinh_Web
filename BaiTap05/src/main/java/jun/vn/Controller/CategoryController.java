@@ -1,61 +1,59 @@
 package jun.vn.Controller;
 
-import java.util.List;
+import jun.vn.entities.CategoryEntity;
+import jun.vn.services.ICategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import jun.vn.entities.Category;
-import jun.vn.services.CategoryService;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("admin/categories")
-
+@RequestMapping("/admin/categories")
 public class CategoryController {
 
-	@Autowired
-	CategoryService categoryService;
+    @Autowired
+    private ICategoryService service;
 
-	@GetMapping("add")
-	public String add(ModelMap model) {
-		return "admin/add";
-	}
+    // Danh sách + tìm kiếm + phân trang
+    @GetMapping
+    public String list(@RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "") String keyword,
+                       Model model) {
+        Page<CategoryEntity> categories = service.search(keyword, PageRequest.of(page, 5));
+        model.addAttribute("categories", categories);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
+        return "admin/categories/list"; // đúng theo đường dẫn bạn có
+    }
 
-	@RequestMapping("")
+    // Form thêm mới
+    @GetMapping("/new")
+    public String createForm(Model model) {
+        model.addAttribute("category", new CategoryEntity());
+        return "admin/categories/addOrEdit";
+    }
 
-	public String list(ModelMap model) {
-		// gọi hàm findAll() trong service
-		List<Category> list = categoryService.findAll();
-		// chuyển dữ liệu từ list lên biến categories
-		model.addAttribute("categories", list);
-		return "admin/list";
-	}
+    // Lưu (thêm/sửa)
+    @PostMapping("/save")
+    public String save(@ModelAttribute CategoryEntity category) {
+        service.save(category);
+        return "redirect:/admin/categories";
+    }
 
-	@GetMapping("delete/{categoryId}")
-	public ModelAndView delet(ModelMap model, @PathVariable("categoryId") int categoryId) {
-		categoryService.deleteById(categoryId);
-		model.addAttribute("message", "Category is deleted!!!!");
-		return new ModelAndView("redirect:/admin/categories/searchpaginated", model);
-	}
+    // Form sửa
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("category", service.get(id));
+        return "admin/categories/addOrEdit";
+    }
 
-	@RequestMapping("search")
-	public String search(ModelMap model, @RequestParam(name = "name", required = false) String name) {
-		List<Category> list = null;
-		// có nội dung truyền về không, name là tùy chọn khi required=false
-		if (StringUtils.hasText(name)) {
-			list = categoryService.findByCategoryNameContaining(name);
-		} else {
-			list = categoryService.findAll();
-		}
-		model.addAttribute("categories", list);
-		return "admin/search";
-
-	}
+    // Xóa
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/admin/categories";
+    }
 }

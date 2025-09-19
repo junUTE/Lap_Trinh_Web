@@ -1,38 +1,16 @@
 package jun.vn.services;
 
-import java.util.List;
-import java.util.Optional;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-
-import jun.vn.entities.Category;
+import jun.vn.entities.CategoryEntity;
 
 public interface ICategoryService {
-	void delete(Category entity);
 
-	void deleteById(Long id);
+    Page<CategoryEntity> search(String keyword, Pageable pageable);
 
-	long count();
+    CategoryEntity save(CategoryEntity category);
 
-	<S extends Category> Optional<S> findOne(Example<S> example);
+    CategoryEntity get(Long id);
 
-	Optional<Category> findById(Long id);
-
-	List<Category> findAllById(Iterable<Long> ids);
-
-	List<Category> findAll(Sort sort);
-
-	Page<Category> findAll(Pageable pageable);
-
-	List<Category> findAll();
-
-	Optional<Category> findByCategoryName(String name);
-
-	<S extends Category> S save(S entity);
-
-	Page<Category> findByCategoryNameContaining(String name, Pageable pageable);
-
-	List<Category> findByCategoryNameContaining(String name);
+    void delete(Long id);
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home}">
+
+<section class="row" layout:fragment="content">
+  <div class="col mt-4">
+    <div class="card shadow">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">📂 Category List</h5>
+        <!-- Nút Add Category bấm được -->
+        <a th:href="@{/admin/categories/new}" class="btn btn-primary">
+          <i class="fa fa-plus"></i> Add Category
+        </a>
+      </div>
+      <div class="card-body">
+        <div th:if="${message != null}" class="alert alert-success" role="alert">
+          [[${message}]]
+        </div>
+        <table class="table table-hover table-bordered align-middle">
+          <thead class="table-light">
+          <tr>
+            <th style="width: 80px;">#</th>
+            <th>Category Name</th>
+            <th style="width: 150px;">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="category, iter : ${categories}">
+            <td th:text="${iter.index + 1}"></td>
+            <td th:text="${category.name}"></td>
+            <td>
+              <a th:href="@{'/admin/categories/edit/' + ${category.categoryId}}" 
+                 class="btn btn-sm btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a th:href="@{'/admin/categories/delete/' + ${category.categoryId}}" 
+                 class="btn btn-sm btn-danger"
+                 onclick="return confirm('Are you sure to delete this category?')">
+                <i class="fa fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(categories)}">
+            <td colspan="3" class="text-center text-muted">No categories found</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+</html>
