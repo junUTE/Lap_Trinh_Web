@@ -40,4 +40,19 @@ public class Product implements Serializable {
 	@ManyToMany
 	@JoinColumn(name = "productId")
 	private User user;
+
+	public Object getImages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setImages(Object images) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getProductId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

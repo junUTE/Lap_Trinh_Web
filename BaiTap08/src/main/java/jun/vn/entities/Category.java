@@ -24,5 +24,16 @@ public class Category implements Serializable{
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL )
     private Set<Product> products;
+	public Object getCategoryId() {
+		return null;
+	}
+	public Object getIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void setIcon(Object icon) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
