@@ -11,20 +11,34 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProductService {
-    void deleteAll();
-    void delete(Product entity);
-    void deleteById(Long id);
-    long count();
-    Optional<Product> findById(Long id);
-    List<Product> findAllById(Iterable<Long> ids);
-    List<Product> findAll(Sort sort);
-    Page<Product> findAll(Pageable pageable);
-    List<Product> findAll();
-    <S extends Product> S save(S entity);
-    List<Product> findByNameContaining(String name);
-    Page<Product> findByNameContaining(String name, Pageable pageable);
+	void delete(Product entity);
 
-    Optional<Product> findByCreateDate(Timestamp timestamp);
+	void deleteById(Long id);
 
-    Optional<Product> findByProductName(String productName);
+	void deleteAll();
+
+	long count();
+
+	List<Product> findAll();
+
+	List<Product> findAllById(Iterable<Long> ids);
+
+	List<Product> findAll(Sort sort);
+
+	Optional<Product> findById(Long id);
+
+	Page<Product> findAll(Pageable pageable);
+
+	<S extends Product> S save(S entity);
+
+	List<Product> findByNameContaining(String name);
+
+	Optional<Product> findByCreateDate(Timestamp timestamp);
+
+	Optional<Product> findByProductName(String productName);
+
+	Page<Product> findByNameContaining(String name, Pageable pageable);
+	
+	List<Product> findByCategoryId(Long categoryId);
+
 }

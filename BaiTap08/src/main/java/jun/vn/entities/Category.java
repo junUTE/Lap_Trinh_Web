@@ -1,6 +1,7 @@
 package jun.vn.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,28 +13,18 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity
 @Table(name = "Category")
 public class Category implements Serializable{
 
-	@Id
 	private static final long serialVersionUID = 1L;
-	private Long categoryId;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long categoryId;
     private String categoryName;
     private String images;
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL )
-    private Set<Product> products;
-	public Object getCategoryId() {
-		return null;
-	}
-	public Object getIcon() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public void setIcon(Object icon) {
-		// TODO Auto-generated method stub
-		
-	}
-    
+    private Set<Product> products; 
 }

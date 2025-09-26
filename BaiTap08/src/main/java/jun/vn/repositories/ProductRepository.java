@@ -13,9 +13,13 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByProductNameContaining(String name);
-    Page<Product> findByProductNameContaining(String name,Pageable
-            pageable);
-    Optional<Product> findByProductName(String name);
-    Optional<Product> findByCreateDate(Date createAt);
+	List<Product> findByProductNameContaining(String name);
+
+	Page<Product> findByProductNameContaining(String name, Pageable pageable);
+
+	Optional<Product> findByProductName(String name);
+
+	Optional<Product> findByCreateDate(Date createAt);
+	
+	List<Product> findByCategoryCategoryId(Long categoryId);
 }

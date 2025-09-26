@@ -9,6 +9,9 @@ import jun.vn.services.IStorageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,43 @@ public class CategoryController {
     ICategoryService categoryService;
     @Autowired
     IStorageService storageService;
+
+    // GraphQL Query and Mutation Mappings
+    @QueryMapping
+    public List<Category> categories() {
+        return categoryService.findAll();
+    }
+
+    @QueryMapping
+    public Category categoryById(@Argument Long id) {
+        return categoryService.findById(id).orElse(null);
+    }
+
+    @MutationMapping
+    public Category createCategory(@Argument CategoryInput input) {
+        Category c = new Category();
+        c.setCategoryName(input.getCategoryName());
+        c.setImages(input.getImages());
+        return categoryService.save(c);
+    }
+
+    @MutationMapping
+    public Category updateCategory(@Argument Long id, @Argument CategoryInput input) {
+        Optional<Category> opt = categoryService.findById(id);
+        if (opt.isEmpty()) return null;
+        Category c = opt.get();
+        c.setCategoryName(input.getCategoryName());
+        c.setImages(input.getImages());
+        return categoryService.save(c);
+    }
+
+    @MutationMapping
+    public Boolean deleteCategory(@Argument Long id) {
+        Optional<Category> opt = categoryService.findById(id);
+        if (opt.isEmpty()) return false;
+        categoryService.delete(opt.get());
+        return true;
+    }
 
     @GetMapping("add")
     public String add(ModelMap model) {
@@ -103,7 +143,6 @@ public class CategoryController {
         return "admin/categories/search";
     }
 
-    // Các view phục vụ render bằng AJAX
     @GetMapping("ajax/list")
     public String listAjax() {
         return "admin/categories/list-ajax";
@@ -118,10 +157,7 @@ public class CategoryController {
                 .body(file);
     }
 
-    @GetMapping("ajax/add")
-    public String addAjax() {
-        return "admin/categories/add-ajax";
-    }
+
 
     @GetMapping("ajax/update")
     public String updateAjax() {
@@ -131,5 +167,15 @@ public class CategoryController {
     @GetMapping("ajax/delete")
     public String deleteAjax() {
         return "admin/categories/delete-ajax";
+    }
+	// Class hỗ trợ nhận dữ liệu đầu vào cho GraphQL
+    public static class CategoryInput {
+        private String categoryName;
+        private String images;
+
+        public String getCategoryName() { return categoryName; }
+        public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+        public String getImages() { return images; }
+        public void setImages(String images) { this.images = images; }
     }
 }

@@ -1,14 +1,15 @@
 package jun.vn.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Set;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.HashSet;
+
 
 @Data
 @AllArgsConstructor
@@ -28,31 +29,12 @@ public class Product implements Serializable {
 	private double unitPrice;
 	@Column(length = 200)
 	private String description;
-	@Column(nullable = false)
-	private Long userId;
 
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
 
-	@JsonIgnore
-	@ManyToMany
-	@JoinColumn(name = "productId")
-	private User user;
-
-	public Object getImages() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setImages(Object images) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Object getProductId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@ManyToMany(mappedBy = "products")
+	private Set<User> users = new HashSet<>();
 }

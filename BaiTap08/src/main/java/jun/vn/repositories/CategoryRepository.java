@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long > {
-    //Tìm Kiếm theo nội dung tên
+    //Tìm Kiếm theo tên
     List<Category> findByCategoryNameContaining(String name);
     //Tìm kiếm và Phân trang
     Page<Category> findByCategoryNameContaining(String name,Pageable pageable);

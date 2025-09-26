@@ -11,17 +11,29 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICategoryService {
-    void delete(Category entity);
-    void deleteById(Long id);
-    long count();
-    <S extends Category> Optional<S> findOne(Example<S> example);
-    Optional<Category> findById(Long id);
-    List<Category> findAllById(Iterable<Long> ids);
-    List<Category> findAll(Sort sort);
-    Page<Category> findAll(Pageable pageable);
-    List<Category> findAll();
-    Optional<Category> findByCategoryName(String name);
-    <S extends Category> S save(S entity);
-    Page<Category> findByCategoryNameContaining(String name, Pageable pageable);
-    List<Category> findByCategoryNameContaining(String name);
+	void deleteById(Long id);
+
+	void delete(Category entity);
+
+	<S extends Category> Optional<S> findOne(Example<S> example);
+
+	long count();
+
+	Page<Category> findAll(Pageable pageable);
+
+	List<Category> findAllById(Iterable<Long> ids);
+
+	Optional<Category> findById(Long id);
+
+	Optional<Category> findByCategoryName(String name);
+
+	List<Category> findAll();
+
+	List<Category> findAll(Sort sort);
+
+	Page<Category> findByCategoryNameContaining(String name, Pageable pageable);
+
+	<S extends Category> S save(S entity);
+
+	List<Category> findByCategoryNameContaining(String name);
 }

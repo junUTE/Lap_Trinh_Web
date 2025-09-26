@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 public class CategoryModel {
 	private Long categoryId;
 	@NotEmpty
-	@Length(min = 5)
+	@Length(min = 4)
 	private String name;
 	private Boolean isEdit = false;
 

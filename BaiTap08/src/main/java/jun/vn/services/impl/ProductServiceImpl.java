@@ -17,88 +17,100 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements IProductService {
-    @Autowired
-    ProductRepository productRepository;
+	@Autowired
+	ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+	public ProductServiceImpl(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
-    @Override
-    public void deleteAll() {
-        productRepository.deleteAll();
-    }
+	@Override
+	public void delete(Product entity) {
+		productRepository.delete(entity);
 
-    @Override
-    public void delete(Product entity) {
-        productRepository.delete(entity);
-    }
+	}
 
-    @Override
-    public void deleteById(Long id) {
-        productRepository.deleteById(id);
-    }
+	@Override
+	public void deleteById(Long id) {
+		productRepository.deleteById(id);
 
-    @Override
-    public long count() {
-        return productRepository.count();
-    }
+	}
 
-    @Override
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
-    }
+	@Override
+	public void deleteAll() {
+		productRepository.deleteAll();
 
-    @Override
-    public List<Product> findAllById(Iterable<Long> ids) {
-        return productRepository.findAllById(ids);
-    }
+	}
 
-    @Override
-    public List<Product> findAll(Sort sort) {
-        return productRepository.findAll(sort);
-    }
+	@Override
+	public long count() {
+		return productRepository.count();
+	}
 
-    @Override
-    public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
+	@Override
+	public List<Product> findAll() {
 
-    @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
-    }
+		return productRepository.findAll();
+	}
 
-    public <S extends Product> S save(S entity) {
-        if (entity.getProductId() == null) {
-            return productRepository.save(entity);
-        } else {
-            Optional<Product> optImages = findById(entity.getProductId());
-            if (StringUtils.isEmpty(entity.getImages())) {
-                entity.setImages(optImages.get().getImages());
-            } else
-                entity.setImages(entity.getImages());
-        }
-        return productRepository.save(entity);
-    }
+	@Override
+	public List<Product> findAllById(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return productRepository.findAllById(ids);
+	}
 
-    @Override
-    public List<Product> findByNameContaining(String name) {
-        return productRepository.findByProductNameContaining(name);
-    }
+	@Override
+	public List<Product> findAll(Sort sort) {
+		// TODO Auto-generated method stub
+		return productRepository.findAll(sort);
+	}
 
-    @Override
-    public Page<Product> findByNameContaining(String name, Pageable pageable) {
-        return productRepository.findByProductNameContaining(name, pageable);
-    }
+	@Override
+	public Optional<Product> findById(Long id) {
+		// TODO Auto-generated method stub
+		return productRepository.findById(id);
+	}
 
-    @Override
-    public Optional<Product> findByCreateDate(Timestamp timestamp) {
-        return productRepository.findByCreateDate(timestamp);
-    }
+	@Override
+	public Page<Product> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return productRepository.findAll(pageable);
+	}
 
-    @Override
-    public Optional<Product> findByProductName(String productName) {
-        return productRepository.findByProductName(productName);
-    }
+	@Override
+	public <S extends Product> S save(S entity) {
+		// TODO Auto-generated method stub
+		return productRepository.save(entity);
+	}
+
+	@Override
+	public List<Product> findByNameContaining(String name) {
+		// TODO Auto-generated method stub
+		return productRepository.findByProductNameContaining(name);
+	}
+
+	@Override
+	public Optional<Product> findByCreateDate(Timestamp timestamp) {
+		// TODO Auto-generated method stub
+		return productRepository.findByCreateDate(timestamp);
+	}
+
+	@Override
+	public Optional<Product> findByProductName(String productName) {
+		// TODO Auto-generated method stub
+		return productRepository.findByProductName(productName);
+	}
+
+	@Override
+	public Page<Product> findByNameContaining(String name, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return productRepository.findByProductNameContaining(name, pageable);
+	}
+
+	@Override
+	public List<Product> findByCategoryId(Long categoryId) {
+		// TODO Auto-generated method stub
+		return productRepository.findByCategoryCategoryId(categoryId);
+	}
+
 }
