@@ -5,30 +5,44 @@
 
 <section class="row" layout:fragment="content">
   <div class="col mt-4">
+    <div class="mb-3">
+      <a th:href="@{/admin/products}" class="btn btn-outline-primary">
+        <i class="fa fa-box"></i> Go to Product List
+      </a>
+    </div>
     <div class="card shadow">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">📂 Category List</h5>
-        <!-- Nút Add Category bấm được -->
         <a th:href="@{/admin/categories/new}" class="btn btn-primary">
           <i class="fa fa-plus"></i> Add Category
         </a>
       </div>
       <div class="card-body">
+        <!-- Hiển thị thông báo -->
         <div th:if="${message != null}" class="alert alert-success" role="alert">
           [[${message}]]
         </div>
+
         <table class="table table-hover table-bordered align-middle">
           <thead class="table-light">
           <tr>
-            <th style="width: 80px;">#</th>
+            <th style="width: 60px;">#</th>
+            <th style="width: 180px;">Icon</th>
             <th>Category Name</th>
-            <th style="width: 150px;">Actions</th>
+            <th style="width: 180px;">Actions</th>
           </tr>
           </thead>
           <tbody>
+          <!-- Lặp qua danh sách categories -->
           <tr th:each="category, iter : ${categories}">
             <td th:text="${iter.index + 1}"></td>
-            <td th:text="${category.name}"></td>
+            <td>
+              <img th:if="${category.icon != null}" 
+                   th:src="@{'/uploads/' + ${category.icon}}" 
+                   alt="icon" class="img-thumbnail" style="max-height: 180px;">
+              <span th:if="${category.icon == null}" class="text-muted">No Icon</span>
+            </td>
+            <td th:text="${category.categoryName}"></td>
             <td>
               <a th:href="@{'/admin/categories/edit/' + ${category.categoryId}}" 
                  class="btn btn-sm btn-warning">
@@ -41,8 +55,10 @@
               </a>
             </td>
           </tr>
+
+          <!-- Trường hợp không có dữ liệu -->
           <tr th:if="${#lists.isEmpty(categories)}">
-            <td colspan="3" class="text-center text-muted">No categories found</td>
+            <td colspan="4" class="text-center text-muted">No categories found</td>
           </tr>
           </tbody>
         </table>

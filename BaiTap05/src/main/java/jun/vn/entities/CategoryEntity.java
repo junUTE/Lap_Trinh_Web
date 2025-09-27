@@ -1,6 +1,9 @@
 package jun.vn.entities;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity
 @Table(name = "Categories")
 public class CategoryEntity implements Serializable {
@@ -17,25 +21,11 @@ public class CategoryEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
     private Long categoryId;
-
-    @Column(name = "category_name", length = 200, nullable = false)
-    private String name;
+    private String categoryName;
+    private String icon;
     
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL )
+    private Set<Product> products;
 }

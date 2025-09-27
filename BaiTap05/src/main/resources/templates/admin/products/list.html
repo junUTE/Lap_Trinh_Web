@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home}">
+<section class="row" layout:fragment="content">
+  <div class="col mt-4">
+    <div class="mb-3">
+      <a th:href="@{/admin/categories}" class="btn btn-outline-primary">
+        <i class="fa fa-folder"></i> Go to Category List
+      </a>
+    </div>
+    <div class="card shadow">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">📦 Product List</h5>
+        <a th:href="@{/admin/products/new}" class="btn btn-primary">
+          <i class="fa fa-plus"></i> Add Product
+        </a>
+      </div>
+      <div class="card-body">
+        <div th:if="${message != null}" class="alert alert-success" role="alert">
+          [[${message}]]
+        </div>
+        <table class="table table-hover table-bordered align-middle">
+          <thead class="table-light">
+          <tr>
+            <th style="width: 60px;">#</th>
+            <th style="width: 120px;">Image</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Discount (%)</th>
+            <th>Status</th>
+            <th style="width: 180px;">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="product, iter : ${products}">
+            <td th:text="${iter.index + 1}"></td>
+            <td>
+              <img th:if="${product.images != null}" th:src="@{${product.images}}" alt="image" class="img-thumbnail" style="max-height: 60px;">
+              <span th:if="${product.images == null}" class="text-muted">No Image</span>
+            </td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.category != null ? product.category.categoryName : 'N/A'}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.unitPrice}"></td>
+            <td th:text="${product.discount}"></td>
+            <td>
+              <span th:if="${product.status == 1}" class="badge bg-success">Active</span>
+              <span th:if="${product.status != 1}" class="badge bg-secondary">Inactive</span>
+            </td>
+            <td>
+              <a th:href="@{'/admin/products/edit/' + ${product.productId}}" class="btn btn-sm btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a th:href="@{'/admin/products/delete/' + ${product.productId}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this product?')">
+                <i class="fa fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+</html>

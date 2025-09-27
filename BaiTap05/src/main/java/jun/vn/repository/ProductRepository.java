@@ -1,5 +1,6 @@
 package jun.vn.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,15 +8,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import jun.vn.entities.CategoryEntity;
+
+import jun.vn.entities.Product;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 //Tìm Kiếm theo nội dung tên
-	List<CategoryEntity> findByCategoryNameContaining(String name);
+	List<Product> findByProductNameContaining(String name);
 
 //Tìm kiếm và Phân trang
-	Page<CategoryEntity> findByCategoryNameContaining(String name, Pageable pageable);
+	Page<Product> findByProductNameContaining(String name, Pageable pageable);
 
-	Optional<CategoryEntity> findByCategoryName(String name);
+	Optional<Product> findByProductName(String name);
+
+	Optional<Product> findByCreateDate(Date createAt);
 }
