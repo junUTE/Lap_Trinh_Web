@@ -4,74 +4,99 @@ import jun.vn.entities.CategoryEntity;
 import jun.vn.services.ICategoryService;
 import jun.vn.services.IStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/categories")
 public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
-
     @Autowired
     private IStorageService storageService;
 
-    @GetMapping({"", "/"})
-    public String listCategories(Model model,
-                                 @RequestParam(value = "message", required = false) String message) {
-        model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("message", message);
+    // --- View endpoints for AJAX pages ---
+    @GetMapping("/ajax/list")
+    public String listAjax() {
         return "admin/categories/list";
     }
-
-    @GetMapping("/new")
-    public String showAddForm(Model model) {
-        model.addAttribute("category", new CategoryEntity());
-        return "admin/categories/addOrEdit";
+    @GetMapping("/ajax/add")
+    public String addAjax() {
+        return "admin/categories/add";
+    }
+    @GetMapping("/ajax/update")
+    public String updateAjax() {
+        return "admin/categories/update";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Optional<CategoryEntity> category = categoryService.findById(id);
-        if (category.isPresent()) {
-            model.addAttribute("category", category.get());
-            return "admin/categories/addOrEdit";
-        } else {
-            return "redirect:/admin/categories?message=Category not found";
-        }
+    // --- REST API endpoints for AJAX ---
+    @GetMapping("/api")
+    @ResponseBody
+    public List<CategoryEntity> getAllCategories() {
+        return categoryService.findAll();
     }
 
-    @PostMapping("/save")
-    public String saveCategory(@ModelAttribute CategoryEntity category,
-                              @RequestParam(value = "iconFile", required = false) MultipartFile iconFile) {
+    @GetMapping("/api/{id}")
+    @ResponseBody
+    public ResponseEntity<CategoryEntity> getCategory(@PathVariable("id") Long id) {
+        Optional<CategoryEntity> opt = categoryService.findById(id);
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping(value = "/api", consumes = "multipart/form-data")
+    @ResponseBody
+    public ResponseEntity<CategoryEntity> createCategory(
+            @RequestParam("categoryName") String categoryName,
+            @RequestParam(value = "icon", required = false) MultipartFile icon) {
         try {
-            if (iconFile != null && !iconFile.isEmpty()) {
-                // Generate a unique filename for the icon
-                String iconPath = "/upload/" + storageService.getSorageFilename(iconFile, category.getCategoryId() != null ? category.getCategoryId().toString() : String.valueOf(System.currentTimeMillis()));
-                storageService.store(iconFile, iconPath);
-                category.setIcon(iconPath);
-            } else if (category.getCategoryId() != null) {
-                // Editing: keep the old icon if no new file is uploaded
-                CategoryEntity old = categoryService.findById(category.getCategoryId()).orElse(null);
-                if (old != null) {
-                    category.setIcon(old.getIcon());
-                }
+            CategoryEntity c = new CategoryEntity();
+            c.setCategoryName(categoryName);
+            if (icon != null && !icon.isEmpty()) {
+                String originalFilename = icon.getOriginalFilename();
+                String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+                String storeFilename = UUID.randomUUID().toString() + ext;
+                storageService.store(icon, storeFilename);
+                c.setIcon(storeFilename);
             }
-            categoryService.save(category);
-            return "redirect:/admin/categories?message=Category saved successfully";
+            CategoryEntity saved = categoryService.save(c);
+            return ResponseEntity.ok(saved);
         } catch (Exception e) {
-            return "redirect:/admin/categories?message=Error saving category: " + e.getMessage();
+            return ResponseEntity.badRequest().build();
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id) {
-        categoryService.deleteById(id);
-        return "redirect:/admin/categories?message=Category deleted successfully";
+    @PutMapping(value = "/api/{id}", consumes = "multipart/form-data")
+    @ResponseBody
+    public ResponseEntity<CategoryEntity> updateCategory(
+            @PathVariable("id") Long id,
+            @RequestParam("categoryName") String categoryName,
+            @RequestParam(value = "icon", required = false) MultipartFile icon) {
+        Optional<CategoryEntity> opt = categoryService.findById(id);
+        if (opt.isEmpty()) return ResponseEntity.notFound().build();
+        CategoryEntity c = opt.get();
+        c.setCategoryName(categoryName);
+        if (icon != null && !icon.isEmpty()) {
+            String originalFilename = icon.getOriginalFilename();
+            String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String storeFilename = UUID.randomUUID().toString() + ext;
+            storageService.store(icon, storeFilename);
+            c.setIcon(storeFilename);
+        }
+        CategoryEntity saved = categoryService.save(c);
+        return ResponseEntity.ok(saved);
+    }
+
+    @DeleteMapping("/api/{id}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
+        Optional<CategoryEntity> opt = categoryService.findById(id);
+        if (opt.isEmpty()) return ResponseEntity.notFound().build();
+        categoryService.delete(opt.get());
+        return ResponseEntity.ok().build();
     }
 }

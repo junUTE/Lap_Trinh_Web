@@ -3,67 +3,113 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/home}">
 
+<!-- Nội dung chính -->
 <section class="row" layout:fragment="content">
-  <div class="col mt-4">
-    <div class="mb-3">
-      <a th:href="@{/admin/products}" class="btn btn-outline-primary">
-        <i class="fa fa-box"></i> Go to Product List
-      </a>
-    </div>
-    <div class="card shadow">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">📂 Category List</h5>
-        <a th:href="@{/admin/categories/new}" class="btn btn-primary">
-          <i class="fa fa-plus"></i> Add Category
-        </a>
-      </div>
-      <div class="card-body">
-        <!-- Hiển thị thông báo -->
-        <div th:if="${message != null}" class="alert alert-success" role="alert">
-          [[${message}]]
+    <div class="col mt-4">
+        <div class="mb-3">
+            <a href="/admin/products/ajax/list" class="btn btn-outline-primary">
+                <i class="fa fa-box"></i> Go to Product List
+            </a>
         </div>
 
-        <table class="table table-hover table-bordered align-middle">
-          <thead class="table-light">
-          <tr>
-            <th style="width: 60px;">#</th>
-            <th style="width: 180px;">Icon</th>
-            <th>Category Name</th>
-            <th style="width: 180px;">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <!-- Lặp qua danh sách categories -->
-          <tr th:each="category, iter : ${categories}">
-            <td th:text="${iter.index + 1}"></td>
-            <td>
-              <img th:if="${category.icon != null}" 
-                   th:src="@{'/uploads/' + ${category.icon}}" 
-                   alt="icon" class="img-thumbnail" style="max-height: 180px;">
-              <span th:if="${category.icon == null}" class="text-muted">No Icon</span>
-            </td>
-            <td th:text="${category.categoryName}"></td>
-            <td>
-              <a th:href="@{'/admin/categories/edit/' + ${category.categoryId}}" 
-                 class="btn btn-sm btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a th:href="@{'/admin/categories/delete/' + ${category.categoryId}}" 
-                 class="btn btn-sm btn-danger"
-                 onclick="return confirm('Are you sure to delete this category?')">
-                <i class="fa fa-trash"></i>
-              </a>
-            </td>
-          </tr>
+        <div class="card shadow">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">📂 Category List</h5>
+                <a href="/admin/categories/ajax/add" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Add Category
+                </a>
+            </div>
 
-          <!-- Trường hợp không có dữ liệu -->
-          <tr th:if="${#lists.isEmpty(categories)}">
-            <td colspan="4" class="text-center text-muted">No categories found</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+            <div class="card-body">
+                <!-- Hiển thị thông báo -->
+                <div id="messageBox" class="alert alert-success d-none" role="alert"></div>
+
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th style="width: 180px;">Icon</th>
+                            <th>Category Name</th>
+                            <th style="width: 180px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoryTableBody">
+                        <!-- Data will be loaded by AJAX -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
+
+<!-- Script riêng của trang này -->
+<div layout:fragment="scripts">
+    <script th:inline="javascript">
+        console.log("JS for Category List loaded");
+
+        function fetchCategories() {
+            fetch('/admin/categories/api')
+                .then(response => response.json())
+                .then(categories => {
+                    const tbody = document.getElementById('categoryTableBody');
+                    tbody.innerHTML = '';
+                    if (!categories || categories.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No categories found</td></tr>';
+                        return;
+                    }
+                    categories.forEach((c, idx) => {
+                        const iconHtml = c.icon
+                            ? `<img src="${c.icon}" alt="icon" class="img-thumbnail" style="max-height: 80px;">`
+                            : '<span class="text-muted">No Icon</span>';
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${idx + 1}</td>
+                                <td>${iconHtml}</td>
+                                <td>${c.categoryName}</td>
+                                <td>
+                                    <a href="/admin/categories/ajax/update?id=${c.categoryId}" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteCategory(${c.categoryId})">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
+                    });
+                })
+                .catch(err => {
+                    console.error("Error fetching categories:", err);
+                    document.getElementById('categoryTableBody').innerHTML =
+                        '<tr><td colspan="4" class="text-center text-danger">Failed to load categories</td></tr>';
+                });
+        }
+
+        function deleteCategory(id) {
+            if (!confirm('Are you sure to delete this category?')) return;
+            fetch(`/admin/categories/api/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    showMessage('Category deleted successfully!');
+                    fetchCategories();
+                } else {
+                    response.text().then(msg => showMessage(msg || 'Delete failed', true));
+                }
+            })
+            .catch(() => showMessage('Delete failed', true));
+        }
+
+        function showMessage(msg, isError) {
+            const box = document.getElementById('messageBox');
+            box.textContent = msg;
+            box.classList.remove('d-none', 'alert-success', 'alert-danger');
+            box.classList.add(isError ? 'alert-danger' : 'alert-success');
+            setTimeout(() => box.classList.add('d-none'), 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchCategories);
+    </script>
+</div>
+
 </html>

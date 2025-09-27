@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home}">
+<section class="row" layout:fragment="content">
+    <div class="col-md-8 offset-md-2 mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Edit Product</h5>
+            </div>
+            <div class="card-body">
+                <div id="messageBox" class="alert d-none" role="alert"></div>
+                <form id="productForm" enctype="multipart/form-data">
+                    <input type="hidden" id="productId" name="productId" />
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" id="productName" name="productName" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control" required min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Unit Price</label>
+                        <input type="number" id="unitPrice" name="unitPrice" class="form-control" required min="0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Discount (%)</label>
+                        <input type="number" id="discount" name="discount" class="form-control" required min="0" max="100" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select id="status" name="status" class="form-select" required>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select id="categoryId" name="categoryId" class="form-select" required></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea id="description" name="description" class="form-control" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Image</label>
+                        <input type="file" id="imageFile" name="image" class="form-control" accept="image/*">
+                        <div id="currentImageBox" class="mt-2 d-none">
+                            <p>Current image:</p>
+                            <img id="currentImage" src="#" alt="image" style="max-width: 120px; max-height: 120px;" />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a href="/admin/products/" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Back
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+function getQueryParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name);
+}
+
+function showMessage(msg, isError) {
+    const box = document.getElementById('messageBox');
+    box.textContent = msg;
+    box.classList.remove('d-none', 'alert-success', 'alert-danger');
+    box.classList.add(isError ? 'alert-danger' : 'alert-success');
+    setTimeout(() => box.classList.add('d-none'), 3000);
+}
+
+function loadCategories(selectedId) {
+    fetch('/admin/categories/api')
+        .then(res => res.json())
+        .then(categories => {
+            const select = document.getElementById('categoryId');
+            select.innerHTML = '<option value="">-- Select Category --</option>';
+            categories.forEach(cat => {
+                select.innerHTML += `<option value="${cat.categoryId}"${cat.categoryId==selectedId?" selected":''}>${cat.categoryName}</option>`;
+            });
+        });
+}
+
+function loadProduct(id) {
+    fetch(`/admin/products/api/${id}`)
+        .then(res => {
+            if (!res.ok) throw new Error('Not found');
+            return res.json();
+        })
+        .then(product => {
+            document.getElementById('productId').value = product.productId;
+            document.getElementById('productName').value = product.productName;
+            document.getElementById('quantity').value = product.quantity;
+            document.getElementById('unitPrice').value = product.unitPrice;
+            document.getElementById('discount').value = product.discount;
+            document.getElementById('status').value = product.status;
+            document.getElementById('description').value = product.description;
+            loadCategories(product.category.categoryId);
+            if (product.images) {
+                document.getElementById('currentImage').src = '/uploads/' + product.images;
+                document.getElementById('currentImageBox').classList.remove('d-none');
+            }
+        })
+        .catch(() => showMessage('Failed to load product', true));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const productId = getQueryParam('id');
+    if (productId) {
+        loadProduct(productId);
+    } else {
+        showMessage('No product ID provided', true);
+    }
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        if (!form.productId.value) {
+            showMessage('Missing product ID', true);
+            return;
+        }
+        // Map all required fields for the controller
+        formData.set('productName', form.productName.value);
+        formData.set('quantity', form.quantity.value);
+        formData.set('unitPrice', form.unitPrice.value);
+        formData.set('discount', form.discount.value);
+        formData.set('status', form.status.value);
+        formData.set('categoryId', form.categoryId.value);
+        formData.set('description', form.description.value);
+        // The image file is already included by the browser if selected
+        fetch(`/admin/products/api/${form.productId.value}`, {
+            method: 'PUT',
+            body: formData
+        })
+        .then(res => {
+            if (!res.ok) return res.text().then(msg => { throw new Error(msg); });
+            return res.json();
+        })
+        .then(() => {
+            window.location.href = '/admin/products';
+        })
+        .catch(err => showMessage(err.message || 'Save failed', true));
+    });
+});
+</script>
+</html>
