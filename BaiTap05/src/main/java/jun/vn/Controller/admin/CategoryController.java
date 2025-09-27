@@ -21,7 +21,7 @@ public class CategoryController {
     private IStorageService storageService;
 
     // --- View endpoints for AJAX pages ---
-    @GetMapping("/ajax/list")
+    @GetMapping({"/ajax/list","/"})
     public String listAjax() {
         return "admin/categories/list";
     }
