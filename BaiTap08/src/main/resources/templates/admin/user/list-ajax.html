@@ -22,6 +22,15 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="mb-0"><i class="fas fa-users me-2"></i>Danh sách người dùng</h4>
             <div class="d-flex gap-2">
+				<!-- Nút chuyển sang Products -->
+				   <a href="/admin/products/ajax/list" class="btn btn-success">
+				       <i class="fas fa-box me-1"></i>Sản phẩm
+				   </a>
+
+				   <!-- Nút chuyển sang Users -->
+				   <a href="/admin/categories/ajax/list" class="btn btn-warning">
+				       <i class="fas fa-users me-1"></i>Danh mục
+				   </a>
                 <button type="button" class="btn btn-primary" onclick="showCreateUserModal()">
                     <i class="fas fa-plus me-1"></i>Thêm người dùng
                 </button>

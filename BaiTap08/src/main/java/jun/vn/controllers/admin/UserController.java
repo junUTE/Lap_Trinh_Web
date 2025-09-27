@@ -83,7 +83,7 @@ public class UserController {
         return "admin/user/delete-ajax";
     }
 
-    // Input class for GraphQL mutations
+    // GraphQL input type mapping
     public static class UserInput {
         private String userName;
         private String fullName;

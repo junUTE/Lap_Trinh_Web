@@ -19,9 +19,11 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +59,20 @@ public class ProductController {
     @QueryMapping
     public Product productById(@Argument Long id) {
         return productService.findById(id).orElse(null);
+    }
+    
+    @PostMapping("ajax/add")
+    @ResponseBody
+    public Product addProduct(@RequestBody ProductController.ProductInput input) {
+        Product p = new Product();
+        p.setProductName(input.getProductName());
+        p.setUnitPrice(input.getUnitPrice());
+        p.setDescription(input.getDescription());
+        p.setQuantity(input.getQuantity());
+        Category c = new Category();
+        c.setCategoryId(input.getCategoryId());
+        p.setCategory(c);
+        return productService.save(p);
     }
 
     @MutationMapping
@@ -119,7 +135,7 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Render HTML views
+    // AJAX view pages for Products
     @GetMapping("ajax/list")
     public String listAjax() {
         return "admin/products/list-ajax";
@@ -140,7 +156,7 @@ public class ProductController {
         return "admin/products/delete-ajax";
     }
 
-    // Input class for GraphQL mutations
+    // GraphQL input type mapping
     public static class ProductInput {
         private String productName;
         private Double unitPrice;

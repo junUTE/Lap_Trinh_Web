@@ -1,94 +1,223 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layout-admin}">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout-admin}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Xóa danh mục (AJAX)</title>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var contextPath = /*[[@{/}]]*/ '/';
-        if (contextPath && !contextPath.endsWith('/')) { contextPath = contextPath + '/'; }
-        /*]]>*/
-    </script>
+	<meta charset="UTF-8">
+	<title>Danh sách danh mục (AJAX)</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		crossorigin="anonymous" referrerpolicy="no-referrer">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var contextPath = /*[[@{/}]]*/ '/';
+		if (contextPath && !contextPath.endsWith('/')) {contextPath = contextPath + '/';}
+		var graphqlEndpoint = contextPath + 'graphql';
+		/*]]>*/
+	</script>
 </head>
+
 <body>
-<div layout:fragment="content" class="container py-3">
-    <!-- Modal Delete Category -->
-    <div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCategoryLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa category này?</p>
-                    <input type="hidden" id="delete_categoryid">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnConfirmDelete">Xóa</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div layout:fragment="content" class="container-fluid py-3">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h4 class="mb-0">
+					<i class="fas fa-list me-2"></i>Danh sách danh mục
+				</h4>
+				<div class="d-flex gap-2">
+					<!-- Nhóm chức năng chính -->
+					<button type="button" class="btn btn-primary" onclick="showCreateNewCategoryModal()">
+						<i class="fas fa-plus me-1"></i> Thêm danh mục
+					</button>
+				</div>
+				<div class="d-flex gap-2">
+					<!-- Nhóm chuyển trang -->
+					<a href="/admin/products/ajax/list" class="btn btn-success">
+						<i class="fas fa-box me-1"></i> Sản phẩm
+					</a>
+					<a href="/admin/users/ajax/list" class="btn btn-warning">
+						<i class="fas fa-users me-1"></i> Người dùng
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<table class="table table-striped table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Icon</th>
+						<th>Tên danh mục</th>
+						<th>Thao tác</th>
+					</tr>
+				</thead>
+				<tbody id="categories-tbody">
+					<!-- dữ liệu sẽ được render bằng AJAX -->
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-    <script type="text/javascript">
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-        function goBackToList() {
-            window.location.href = contextPath + 'admin/categories/ajax/list';
-        }
+	<!-- Modal Add Category -->
+	<div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="addCategory" method="post" enctype="multipart/form-data">
+					<div class="modal-header">
+						<h5 class="modal-title" id="createCategoryLabel">Thêm danh mục</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="new_categoryname" class="form-label">Tên danh mục</label>
+							<input type="text" class="form-control" id="new_categoryname" name="categoryName">
+						</div>
+						<div class="mb-3">
+							<label for="new_icon" class="form-label">Icon</label>
+							<input type="file" class="form-control" id="new_icon" name="icon">
+						</div>
+						<div class="d-grid">
+							<button type="submit" class="btn btn-primary">Thêm</button>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-        $(document).ready(function () {
-            var id = getQueryParam('id');
-            if (!id) {
-                alert('Thiếu tham số id');
-                return goBackToList();
-            }
-            $('#delete_categoryid').val(id);
-            try {
-                var delEl = document.getElementById('deleteCategoryModal');
-                var modal = bootstrap.Modal.getInstance(delEl) || new bootstrap.Modal(delEl);
-                modal.show();
-            } catch (e) {
-                $('#deleteCategoryModal').modal('show');
-            }
+	<!-- Scripts -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			loadCategories();
 
-            $('#btnConfirmDelete').on('click', function () {
-                var idDel = $('#delete_categoryid').val();
-                $.ajax({
-                    url: contextPath + 'api/category/deleteCategory?categoryId=' + encodeURIComponent(idDel),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    success: function (res) {
-                        if (res && (res.status === true || res.status === 'true')) {
-                            try {
-                                var delEl2 = document.getElementById('deleteCategoryModal');
-                                var modal2 = bootstrap.Modal.getInstance(delEl2) || new bootstrap.Modal(delEl2);
-                                modal2.hide();
-                            } catch (e) {
-                                $('#deleteCategoryModal').modal('hide');
-                            }
-                            goBackToList();
-                        } else {
-                            alert(res && res.message ? res.message : 'Xóa thất bại');
-                        }
-                    },
-                    error: function (xhr) {
-                        alert('Lỗi gọi API: ' + (xhr.responseText || xhr.status));
-                    }
-                });
-            });
+			// Submit add form via AJAX
+			$("form#addCategory").submit(function (e) {
+				e.preventDefault();
+				var formData = new FormData(this);
+				$.ajax({
+					url: contextPath + 'api/category/addCategory',
+					type: 'POST',
+					dataType: "json",
+					data: formData,
+					success: function (res) {
+						if (res && (res.status === true || res.status === 'true')) {
+							try {
+								var createModalEl = document.getElementById('createCategoryModal');
+								if (createModalEl) {
+									var modal = bootstrap.Modal.getInstance(createModalEl) || new bootstrap.Modal(createModalEl);
+									modal.hide();
+								}
+							} catch (e) {
+								$('#createCategoryModal').modal('hide');
+							}
+							loadCategories();
+						} else {
+							alert(res && res.message ? res.message : 'Có lỗi xảy ra');
+						}
+					},
 
-            $('#deleteCategoryModal').on('hidden.bs.modal', function () {
-                goBackToList();
-            });
-        });
-    </script>
-</div>
+					cache: false,
+					contentType: false,
+					processData: false
+				});
+			});
+
+			// Delegated navigation for Edit/Delete buttons
+			$('#categories-tbody').on('click', 'a.btn-edit', function (e) {
+				e.preventDefault();
+				var id = $(this).data('id');
+				if (id != null) {
+					window.location.href = contextPath + 'admin/categories/ajax/update?id=' + encodeURIComponent(id);
+				}
+			});
+			$('#categories-tbody').on('click', 'a.btn-delete', function (e) {
+				e.preventDefault();
+				var id = $(this).data('id');
+				if (id != null) {
+					window.location.href = contextPath + 'admin/categories/ajax/delete?id=' + encodeURIComponent(id);
+				}
+			});
+
+		});
+		function gqlRequest(query, variables) {
+			return $.ajax({
+				url: graphqlEndpoint,
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({query: query, variables: variables || {}})
+			}).then(function (res) {
+				if (res.errors) {
+					throw (res.errors[0] && res.errors[0].message) || 'GraphQL error';
+				}
+				return res.data;
+			});
+		}
+
+		$("form#addCategory").submit(function (e) {
+			e.preventDefault();
+			const variables = {input: {categoryName: $('#new_categoryname').val(), images: $('#new_images').val()}};
+			gqlRequest("mutation($input: CategoryInput!){ createCategory(input: $input){ categoryId categoryName images } }", variables)
+				.then(function () {
+					try {
+						var el = document.getElementById('createCategoryModal');
+						var modal = bootstrap.Modal.getInstance(el) || new bootstrap.Modal(el);
+						modal.hide();
+					} catch (e) {
+						$('#createCategoryModal').modal('hide');
+					}
+					if (typeof loadCategories === 'function') loadCategories();
+				})
+				.catch(function (err) {alert('Error: ' + err);});
+		});
+
+		function showCreateNewCategoryModal() {
+			$('#new_categoryname').val('');
+			$('#new_images').val('');
+			try {
+				var el = document.getElementById('createCategoryModal');
+				var modal = bootstrap.Modal.getInstance(el) || new bootstrap.Modal(el);
+				modal.show();
+			} catch (e) {
+				$('#createCategoryModal').modal('show');
+			}
+		}
+
+		function loadCategories() {
+			$.getJSON(contextPath + 'api/category', function (json) {
+				console.log("API response:", json); // xem dữ liệu
+				var categories = Array.isArray(json) ? json : (json && json.body) ? json.body : [];
+				console.log("Categories:", categories);
+
+				var rows = [];
+				categories.forEach(c => {
+					rows.push('<tr>');
+					rows.push('<td>' + (c.categoryId ?? '') + '</td>');
+					rows.push('<td>' + (c.icon
+						? '<img src="' + contextPath + 'admin/categories/images/' + c.icon + '" style="width:70px">'
+						: '<span class="text-muted">No icon</span>') + '</td>');
+					rows.push('<td>' + (c.categoryName ?? '') + '</td>');
+					rows.push('<td>' +
+						'<a href="#" data-id="' + c.categoryId + '" class="btn btn-outline-warning me-1 btn-edit" title="Sửa"><i class="fa fa-edit"></i></a>' +
+						'<a href="#" data-id="' + c.categoryId + '" class="btn btn-outline-danger btn-delete" title="Xóa"><i class="fa fa-trash"></i></a>' +
+						'</td>');
+					rows.push('</tr>');
+				});
+				$('#categories-tbody').html(rows.join(''));
+			}).fail(function (xhr, status, error) {
+				console.error("AJAX error:", status, error);
+			});
+		}
+
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	</div>
 </body>
+
 </html>

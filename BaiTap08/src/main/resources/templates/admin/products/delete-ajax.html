@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Xóa sản phẩm (AJAX + GraphQL)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var contextPath = /*[[@{/}]]*/ '/';
@@ -14,89 +16,75 @@
     </script>
 </head>
 <body>
-<div layout:fragment="content" class="container py-3">
-    <!-- Modal Delete Product -->
-    <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteProductLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa sản phẩm này?</p>
-                    <input type="hidden" id="delete_productid">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnConfirmDelete">Xóa</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                </div>
+<div layout:fragment="content" class="container py-4">
+    <div class="card">
+        <div class="card-header">
+            <h5>Xóa sản phẩm</h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-3">Bạn có chắc muốn xóa sản phẩm này?</p>
+            <div id="productInfo" class="mb-3 text-muted"></div>
+            <div class="d-flex gap-2">
+                <button id="btnDelete" class="btn btn-danger">Xóa</button>
+                <a th:href="@{/admin/products/ajax/list}" class="btn btn-secondary">Hủy</a>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function gqlRequest(query, variables) {
-            return $.ajax({
-                url: graphqlEndpoint,
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ query: query, variables: variables || {} })
-            }).then(function (res) {
-                if (res.errors) {
-                    throw (res.errors[0] && res.errors[0].message) || 'GraphQL error';
-                }
-                return res.data;
-            });
-        }
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-        function goBackToList() {
-            window.location.href = contextPath + 'admin/products/ajax/list';
-        }
-        $(document).ready(function () {
-            var id = getQueryParam('id');
-            if (!id) {
-                alert('Thiếu tham số id');
-                return goBackToList();
-            }
-            $('#delete_productid').val(id);
-            try {
-                var delEl = document.getElementById('deleteProductModal');
-                var modal = bootstrap.Modal.getInstance(delEl) || new bootstrap.Modal(delEl);
-                modal.show();
-            } catch (e) {
-                $('#deleteProductModal').modal('show');
-            }
-
-            $('#btnConfirmDelete').on('click', function () {
-                var idDel = $('#delete_productid').val();
-                gqlRequest(`mutation($id: ID!){ deleteProduct(id: $id) }`, { id: idDel })
-                    .then(function (data) {
-                        var ok = data && data.deleteProduct === true;
-                        if (ok) {
-                            try {
-                                var delEl2 = document.getElementById('deleteProductModal');
-                                var modal2 = bootstrap.Modal.getInstance(delEl2) || new bootstrap.Modal(delEl2);
-                                modal2.hide();
-                            } catch (e) {
-                                $('#deleteProductModal').modal('hide');
-                            }
-                            goBackToList();
-                        } else {
-                            alert('Xóa thất bại');
-                        }
-                    })
-                    .catch(function (err) { alert('Lỗi: ' + err); });
-            });
-
-            $('#deleteProductModal').on('hidden.bs.modal', function () {
-                goBackToList();
-            });
-        });
-    </script>
 </div>
+
+<script type="text/javascript">
+    var globalId = null;
+
+    $(function(){
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get('id');
+        if (!id) { 
+            alert('Thiếu id'); 
+            window.location.href = contextPath + 'admin/products/ajax/list'; 
+            return; 
+        }
+        globalId = id;
+
+        // Lấy thông tin sản phẩm để hiển thị
+        gqlRequest(`query($id: ID!){ productById(id: $id){ productId productName unitPrice } }`, {id:id})
+            .then(function(data){
+                var p = data && data.productById;
+                if (!p) { 
+                    $('#productInfo').text('Không tìm thấy sản phẩm'); 
+                    return; 
+                }
+                $('#productInfo').html('ID: <b>' + p.productId + '</b> - ' + (p.productName || '') 
+                    + ' | Giá: ' + (p.unitPrice ?? 'N/A'));
+            })
+            .catch(function(err){ console.error(err); });
+
+        // Sự kiện nút Xóa
+        $('#btnDelete').on('click', function(){
+            gqlRequest(`mutation($id: ID!){ deleteProduct(id: $id) }`, {id: globalId})
+                .then(function(){
+                    alert('Đã xóa');
+                    window.location.href = contextPath + 'admin/products/ajax/list';
+                })
+                .catch(function(err){ alert('Lỗi: ' + err); });
+        });
+    });
+
+    // Hàm gọi GraphQL chung
+    function gqlRequest(query, variables) {
+        return $.ajax({
+            url: graphqlEndpoint,
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ query: query, variables: variables || {} })
+        }).then(function (res) {
+            if (res.errors) { 
+                throw (res.errors[0] && res.errors[0].message) || 'GraphQL error'; 
+            }
+            return res.data;
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

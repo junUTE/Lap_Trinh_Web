@@ -37,4 +37,13 @@ public class Product implements Serializable {
 
 	@ManyToMany(mappedBy = "products")
 	private Set<User> users = new HashSet<>();
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_date", nullable = false, updatable = false)
+	private java.util.Date createDate;
+	
+	@PrePersist
+	protected void onCreate() {
+	    this.createDate = new java.util.Date();
+	}
 }

@@ -4,7 +4,7 @@
       layout:decorate="~{admin/layout-admin}">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách sản phẩm (AJAX + GraphQL)</title>
+    <title>Cập nhật sản phẩm (AJAX + GraphQL)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet"
@@ -20,67 +20,41 @@
     </script>
 </head>
 <body>
-<div layout:fragment="content" class="container-fluid py-3">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">
-                <i class="fas fa-boxes-stacked me-2"></i>Danh sách sản phẩm
-            </h4>
-            <div class="d-flex gap-2">
-                <button type="button" class="btn btn-primary" onclick="showCreateProductModal()">
-                    <i class="fas fa-plus me-1"></i>Thêm sản phẩm
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Tên</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thao tác</th>
-                </tr>
-                </thead>
-                <tbody id="products-tbody"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Modal Add Product -->
-    <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
+<div layout:fragment="content" class="container py-3">
+    <!-- Modal Edit Product -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="addProductForm" method="post">
+                <form id="editProductForm" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createProductLabel">Thêm sản phẩm</h5>
+                        <h5 class="modal-title" id="editProductLabel">Cập nhật sản phẩm</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" id="edit_productId" name="productId">
                         <div class="mb-3">
-                            <label class="form-label" for="new_productName">Tên sản phẩm</label>
-                            <input class="form-control" id="new_productName" name="productName" required>
+                            <label class="form-label" for="edit_productName">Tên sản phẩm</label>
+                            <input class="form-control" id="edit_productName" name="productName" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="new_unitPrice">Giá</label>
-                            <input type="number" step="0.01" class="form-control" id="new_unitPrice" name="unitPrice" required>
+                            <label class="form-label" for="edit_unitPrice">Giá</label>
+                            <input type="number" step="0.01" class="form-control" id="edit_unitPrice" name="unitPrice" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="new_quantity">Số lượng</label>
-                            <input type="number" class="form-control" id="new_quantity" name="quantity" value="0" required>
+                            <label class="form-label" for="edit_quantity">Số lượng</label>
+                            <input type="number" class="form-control" id="edit_quantity" name="quantity" value="0" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="new_categoryId">Danh mục</label>
-                            <select class="form-select" id="new_categoryId" name="categoryId" required></select>
+                            <label class="form-label" for="edit_categoryId">Danh mục</label>
+                            <select class="form-select" id="edit_categoryId" name="categoryId" required></select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="new_description">Mô tả</label>
-                            <textarea class="form-control" id="new_description" name="description" rows="3"></textarea>
+                            <label class="form-label" for="edit_description">Mô tả</label>
+                            <textarea class="form-control" id="edit_description" name="description" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-warning">Cập nhật</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </form>
@@ -89,45 +63,6 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            loadCategoriesForSelect('#new_categoryId');
-            loadProducts();
-
-            $(document).on('submit', '#addProductForm', function (e) {
-                e.preventDefault();
-                const variables = {
-                    input: {
-                        productName: $('#new_productName').val(),
-                        unitPrice: parseFloat($('#new_unitPrice').val() || '0'),
-                        description: $('#new_description').val(),
-                        quantity: parseInt($('#new_quantity').val() || '0'),
-                        categoryId: parseInt($('#new_categoryId').val())
-                    }
-                };
-                gqlRequest(`mutation($input: ProductInput!) { createProduct(input: $input) { productId productName unitPrice description quantity } }`, variables)
-                    .then(function () {
-                        hideModal('#createProductModal');
-                        loadProducts();
-                    })
-                    .catch(function (err) { alert('Lỗi: ' + err); });
-            });
-
-            $('#products-tbody').on('click', 'a.btn-edit', function (e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                if (id != null) {
-                    window.location.href = contextPath + 'admin/products/ajax/update?id=' + encodeURIComponent(id);
-                }
-            });
-            $('#products-tbody').on('click', 'a.btn-delete', function (e) {
-                e.preventDefault();
-                var id = $(this).data('id');
-                if (id != null) {
-                    window.location.href = contextPath + 'admin/products/ajax/delete?id=' + encodeURIComponent(id);
-                }
-            });
-        });
-
         function gqlRequest(query, variables) {
             return $.ajax({
                 url: graphqlEndpoint,
@@ -141,34 +76,20 @@
                 return res.data;
             });
         }
-
-        function hideModal(selector) {
-            try {
-                var el = document.querySelector(selector);
-                var modal = bootstrap.Modal.getInstance(el) || new bootstrap.Modal(el);
-                modal.hide();
-            } catch (e) {
-                $(selector).modal('hide');
-            }
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
-
-        function showCreateProductModal() {
-            $('#addProductForm')[0].reset();
-            try {
-                var el = document.getElementById('createProductModal');
-                var modal = bootstrap.Modal.getInstance(el) || new bootstrap.Modal(el);
-                modal.show();
-            } catch (e) {
-                $('#createProductModal').modal('show');
-            }
+        function goBackToList() {
+            window.location.href = contextPath + 'admin/products/ajax/list';
         }
-
-        function loadCategoriesForSelect(selectSelector) {
+        function loadCategoriesForSelect(selectSelector, selectedId) {
             gqlRequest(`query { categories { categoryId categoryName } }`)
                 .then(function (data) {
                     var categories = data && data.categories ? data.categories : [];
                     var opts = categories.map(function (c) {
-                        return '<option value="' + c.categoryId + '">' + (c.categoryName || ('ID ' + c.categoryId)) + '</option>';
+                        var sel = (selectedId && (selectedId == c.categoryId)) ? ' selected' : '';
+                        return '<option value="' + c.categoryId + '"' + sel + '>' + (c.categoryName || ('ID ' + c.categoryId)) + '</option>';
                     });
                     $(selectSelector).html(opts.join(''));
                 })
@@ -176,29 +97,74 @@
                     $(selectSelector).html('<option value="">--Không tải được danh mục--</option>');
                 });
         }
-
-        function loadProducts() {
-            gqlRequest(`query { productsSortByPrice { productId productName unitPrice description quantity } }`)
+        $(document).ready(function () {
+            var id = getQueryParam('id');
+            if (!id) {
+                alert('Thiếu tham số id');
+                return goBackToList();
+            }
+            // Load product detail via GraphQL
+            gqlRequest(`query($id: ID!){ productById(id: $id){ productId productName unitPrice description quantity } }`, { id: id })
                 .then(function (data) {
-                    var products = data && data.productsSortByPrice ? data.productsSortByPrice : [];
-                    var rows = products.map(function (p) {
-                        return '<tr>' +
-                            '<td>' + (p.productId ?? '') + '</td>' +
-                            '<td>' + (p.productName ?? '') + '</td>' +
-                            '<td>' + (p.unitPrice ?? '') + '</td>' +
-                            '<td>' + (p.quantity ?? '') + '</td>' +
-                            '<td>' +
-                            '<a href="#" data-id="' + p.productId + '" class="btn btn-outline-warning me-1 btn-edit" title="Sửa"><i class="fa fa-edit"></i></a>' +
-                            '<a href="#" data-id="' + p.productId + '" class="btn btn-outline-danger btn-delete" title="Xóa"><i class="fa fa-trash"></i></a>' +
-                            '</td>' +
-                            '</tr>';
-                    });
-                    $('#products-tbody').html(rows.join(''));
+                    var p = data && data.productById ? data.productById : null;
+                    if (!p) {
+                        alert('Không tìm thấy dữ liệu Product');
+                        return goBackToList();
+                    }
+                    $('#edit_productId').val(p.productId);
+                    $('#edit_productName').val(p.productName || '');
+                    $('#edit_unitPrice').val(p.unitPrice || 0);
+                    $('#edit_quantity').val(p.quantity || 0);
+                    $('#edit_description').val(p.description || '');
+                    loadCategoriesForSelect('#edit_categoryId');
+                    try {
+                        var editEl = document.getElementById('editProductModal');
+                        var modal = bootstrap.Modal.getInstance(editEl) || new bootstrap.Modal(editEl);
+                        modal.show();
+                    } catch (e) {
+                        $('#editProductModal').modal('show');
+                    }
                 })
-                .catch(function (err) { console.error(err); });
-        }
+                .catch(function () {
+                    alert('Lỗi tải dữ liệu');
+                    goBackToList();
+                });
+
+            // Submit update via GraphQL
+            $('#editProductForm').on('submit', function (e) {
+                e.preventDefault();
+                var idVal = $('#edit_productId').val();
+                const variables = {
+                    id: idVal,
+                    input: {
+                        productName: $('#edit_productName').val(),
+                        unitPrice: parseFloat($('#edit_unitPrice').val() || '0'),
+                        description: $('#edit_description').val(),
+                        quantity: parseInt($('#edit_quantity').val() || '0'),
+                        categoryId: parseInt($('#edit_categoryId').val())
+                    }
+                };
+                gqlRequest(`mutation($id: ID!, $input: ProductInput!){ updateProduct(id: $id, input: $input){ productId } }`, variables)
+                    .then(function () {
+                        try {
+                            var editEl = document.getElementById('editProductModal');
+                            var modal = bootstrap.Modal.getInstance(editEl) || new bootstrap.Modal(editEl);
+                            modal.hide();
+                        } catch (e) {
+                            $('#editProductModal').modal('hide');
+                        }
+                        goBackToList();
+                    })
+                    .catch(function (err) { alert('Lỗi cập nhật: ' + err); });
+            });
+
+            $('#editProductModal').on('hidden.bs.modal', function () {
+                goBackToList();
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
 </div>
 </body>
 </html>

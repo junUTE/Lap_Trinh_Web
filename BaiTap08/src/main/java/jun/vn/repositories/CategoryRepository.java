@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long > {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
     //Tìm Kiếm theo tên
     List<Category> findByCategoryNameContaining(String name);
     //Tìm kiếm và Phân trang
