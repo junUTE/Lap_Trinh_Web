@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <decorators defaultdir="/WEB-INF/decorators/">
+
+        <!-- Layout cho seller -->
+        <decorator name="seller" page="seller-layout.jsp">
+            <pattern>/seller/*</pattern>
+        </decorator>
+
+        <!-- Layout cho user -->
+        <decorator name="user" page="user-layout.jsp">
+            <pattern>/*</pattern>
+        </decorator>
+
+    </decorators>
+
+    <!-- exclude API và static resources -->
+    <mapping path="/api/*" exclude="true"/>
+    <mapping path="/resources/*" exclude="true"/>
+    <mapping path="*.css" exclude="true"/>
+    <mapping path="*.js" exclude="true"/>
+    <mapping path="*.png" exclude="true"/>
+    <mapping path="*.jpg" exclude="true"/>
+    <mapping path="*.gif" exclude="true"/>
+
+    <!-- exclude login/register/forgot-password -->
+    <mapping path="/auth/login" exclude="true"/>
+    <mapping path="/auth/register" exclude="true"/>
+    <mapping path="/auth/forgot-password" exclude="true"/>
+</sitemesh>

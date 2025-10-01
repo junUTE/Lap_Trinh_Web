@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<!-- Layout cho admin -->
+	<mapping path="/admin/*"
+		decorator="/WEB-INF/decorators/admin-layout.jsp" />
+
+	<!-- Layout cho user -->
+	<mapping path="/*"
+		decorator="/WEB-INF/decorators/user-layout.jsp" />
+
+	<!-- exclude API và static resources -->
+	<mapping path="/api/*" exclude="true" />
+	<mapping path="*.css" exclude="true" />
+	<mapping path="*.js" exclude="true" />
+	<mapping path="*.png" exclude="true" />
+	<mapping path="*.jpg" exclude="true" />
+	<mapping path="*.gif" exclude="true" />
+
+	<!-- exclude login/register/forgot-password -->
+	<mapping path="/login" exclude="true" />
+	<mapping path="/register" exclude="true" />
+	<mapping path="/forgot-password" exclude="true" />
+</sitemesh>
