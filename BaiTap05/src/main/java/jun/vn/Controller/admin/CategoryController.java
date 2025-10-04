@@ -61,7 +61,7 @@ public class CategoryController {
                 String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
                 String storeFilename = UUID.randomUUID().toString() + ext;
                 storageService.store(icon, storeFilename);
-                c.setIcon(storeFilename);
+                c.setIcon(categoryName);
             }
             CategoryEntity saved = categoryService.save(c);
             return ResponseEntity.ok(saved);
@@ -85,7 +85,7 @@ public class CategoryController {
             String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
             String storeFilename = UUID.randomUUID().toString() + ext;
             storageService.store(icon, storeFilename);
-            c.setIcon(storeFilename);
+            c.setIcon(categoryName);
         }
         CategoryEntity saved = categoryService.save(c);
         return ResponseEntity.ok(saved);
